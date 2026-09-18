@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Muhammad Raffly Husaini — 100% Metaphor ReFantazio UI Edition">
+  <title>Muhammad Raffly Husaini — Metaphor ReFantazio Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SVG Distress & Chalk Noise Filters -->
+  <svg class="svg-filters" style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Gritty Ink Distress Filter for Letterforms & Typography -->
+      <filter id="inkGrunge" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.08 0.12" numOctaves="3" result="noise"/>
+        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" in="noise" result="grunge"/>
+        <feComposite in="SourceGraphic" in2="grunge" operator="in"/>
+      </filter>
+
+      <!-- Chalkboard Erased / Dry-Brush Line Filter -->
+      <filter id="chalkBrush" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65 0.05" numOctaves="4" result="chalkNoise"/>
+        <feDisplacementMap in="SourceGraphic" in2="chalkNoise" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+
+      <!-- Authentic Rough Paint Brush Stroke & Dry-Bristle Edge Filter -->
+      <filter id="roughBrushEdge" x="-30%" y="-30%" width="160%" height="160%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04 0.35" numOctaves="4" result="bristleNoise"/>
+        <feDisplacementMap in="SourceGraphic" in2="bristleNoise" scale="16" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.12 0.08" numOctaves="2" result="fineGrain"/>
+        <feComposite in="displaced" in2="fineGrain" operator="in" result="texturedBrush"/>
+        <feBlend in="SourceGraphic" in2="texturedBrush" mode="normal"/>
+      </filter>
+
+      <!-- Dynamic Paint Slash & Splatter Edge Filter -->
+      <filter id="brushSplatter" x="-40%" y="-40%" width="180%" height="180%">
+        <feTurbulence type="turbulence" baseFrequency="0.03 0.2" numOctaves="5" result="splashNoise"/>
+        <feDisplacementMap in="SourceGraphic" in2="splashNoise" scale="28" xChannelSelector="R" yChannelSelector="G" result="splashed"/>
+        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -4" in="splashed" result="splatterEdge"/>
+        <feComposite in="SourceGraphic" in2="splatterEdge" operator="atop"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Animated Background -->
+  <img src="assets/twk2i43ldc9e1.gif" alt="" class="bg-media" loading="eager">
+  <div class="bg-overlay"></div>
+  <div class="texture-overlay"></div>
+
+  <!-- Chalkboard Erased Diagonal Streaks (Authentic Metaphor Element) -->
+  <div class="chalk-ruler-overlay"></div>
+  <div class="chalk-ruler-overlay sub"></div>
+
+  <!-- Editorial Distressed Print & Abstract Paper/Ink Collage Flashing Layer -->
+  <div class="editorial-collage-layer" id="collageLayer"></div>
+
+  <!-- Top Right Metaphor Authentic COMMAND Graphic (Vertical Bottom-to-Top, Bleeding to Top Edge) -->
+  <div class="command-badge" id="commandBadge">
+    <svg class="cmd-metaphor-svg" viewBox="0 0 200 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Split red accent for bottom-right quadrant of zero -->
+        <linearGradient id="zeroRedSplit" x1="20%" y1="20%" x2="85%" y2="85%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="48%" stop-color="#ffffff"/>
+          <stop offset="48.1%" stop-color="#e53935"/>
+          <stop offset="100%" stop-color="#b71c1c"/>
+        </linearGradient>
+        <filter id="cmdShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="3" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.95"/>
+        </filter>
+      </defs>
+
+      <!-- Diagonal razor slash lines -->
+      <line x1="-30" y1="120" x2="230" y2="280" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+      <line x1="10" y1="300" x2="190" y2="80" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+
+      <!-- TOP DIGIT (Active number e.g. 1, 2, 3...) - Towering at the top -->
+      <text id="cmdDigitValSvg" x="80" y="165" class="cmd-svg-top-digit" text-anchor="middle" filter="url(#cmdShadow)">1</text>
+
+      <!-- BOTTOM DIGIT (0 with red split accent) -->
+      <text id="cmdDigitZeroSvg" x="80" y="325" class="cmd-svg-zero-digit" fill="url(#zeroRedSplit)" text-anchor="middle" filter="url(#cmdShadow)">0</text>
+
+      <!-- VERTICAL COMMAND TEXT (Directly overlapping the right edge of the 0) -->
+      <text x="142" y="320" class="cmd-svg-label" transform="rotate(-90 142 320)">COMMAND</text>
+    </svg>
+  </div>
+
+  <!-- Bottom Right HUD: BGM Controller Only -->
+  <div class="hud-br" id="hudBR">
+    <button class="btn-prompt bgm-toggle playing" id="bgmToggle" aria-label="Toggle Background Music">
+      <span class="key bgm-icon">♫</span> <span class="bgm-text" id="bgmText">BGM: ON</span>
+    </button>
+  </div>
+
+  <!-- Background Music Audio Element -->
+  <audio id="bgmAudio" src="assets/Metaphor_ ReFantazio • Utopia.mp3" loop preload="auto"></audio>
+
+  <!-- Floating Ink Dust Canvas -->
+  <canvas id="inkCanvas" class="ink-canvas"></canvas>
+
+  <!-- ==================== MAIN MENU SCREEN ==================== -->
+  <div class="menu-screen" id="menuScreen">
+    <div class="main-menu-layout">
+      <!-- Left Column: Dynamic Metaphor Menu Stack -->
+      <nav class="main-menu">
+        <div class="menu-stack" role="menu">
+
+          <!-- 01 SKILL -->
+          <div class="menu-item" data-page="skill" data-num="01" data-color="#ab47bc" data-sub="TECHNICAL SKILLS &amp; MASTERY" role="menuitem" tabindex="0">
+            <div class="m-brush-splash"></div>
+            <div class="m-kanji">技・スキル</div>
+            <div class="m-ribbon"><span class="m-num-tag">01</span> TECHNICAL SKILLS &amp; MASTERY</div>
+            <div class="m-word">SKILL</div>
+          </div>
+
+          <!-- 02 ITEM -->
+          <div class="menu-item" data-page="item" data-num="02" data-color="#2e7d32" data-sub="FEATURED PROJECTS &amp; SHOWCASE" role="menuitem" tabindex="0">
+            <div class="m-brush-splash"></div>
+            <div class="m-kanji">道具・アイテム</div>
+            <div class="m-ribbon"><span class="m-num-tag">02</span> FEATURED PROJECTS &amp; SHOWCASE</div>
+            <div class="m-word">ITEM</div>
+          </div>
+
+          <!-- 03 EQUIPMENT -->
+          <div class="menu-item" data-page="equipment" data-num="03" data-color="#d32f2f" data-sub="DEVELOPMENT TOOLS &amp; TECH STACK" role="menuitem" tabindex="0">
+            <div class="m-brush-splash"></div>
+            <div class="m-kanji">装備・イクイップ</div>
+            <div class="m-ribbon"><span class="m-num-tag">03</span> DEVELOPMENT TOOLS &amp; TECH STACK</div>
+            <div class="m-word">EQUIPMENT</div>
+          </div>
+
+          <!-- 04 PARTY -->
+          <div class="menu-item" data-page="party" data-num="04" data-color="#b71c1c" data-sub="DEVELOPER PROFILE &amp; STATS" role="menuitem" tabindex="0">
+            <div class="m-brush-splash"></div>
+            <div class="m-kanji">仲間・プロフィール</div>
+            <div class="m-ribbon"><span class="m-num-tag">04</span> DEVELOPER PROFILE &amp; STATS</div>
+            <div class="m-word">PARTY</div>
+          </div>
+
+          <!-- 05 FOLLOWER -->
+          <div class="menu-item" data-page="follower" data-num="05" data-color="#ef6c00" data-sub="CONTACTS &amp; SOCIAL LINKS" role="menuitem" tabindex="0">
+            <div class="m-brush-splash"></div>
+            <div class="m-kanji">支援者・フォロワー</div>
+            <div class="m-ribbon"><span class="m-num-tag">05</span> CONTACTS &amp; SOCIAL LINKS</div>
+            <div class="m-word">FOLLOWER</div>
+          </div>
+
+          <!-- 06 QUEST -->
+          <div class="menu-item" data-page="quest" data-num="06" data-color="#fbc02d" data-sub="WORK HISTORY &amp; EXPERIENCES" role="menuitem" tabindex="0">
+            <div class="m-brush-splash"></div>
+            <div class="m-kanji">依頼・クエスト</div>
+            <div class="m-ribbon"><span class="m-num-tag">06</span> WORK HISTORY &amp; EXPERIENCES</div>
+            <div class="m-word">QUEST</div>
+          </div>
+
+          <!-- 07 CALENDAR -->
+          <div class="menu-item" data-page="calendar" data-num="07" data-color="#7cb342" data-sub="EDUCATION &amp; MILESTONES" role="menuitem" tabindex="0">
+            <div class="m-brush-splash"></div>
+            <div class="m-kanji">日程・カレンダー</div>
+            <div class="m-ribbon"><span class="m-num-tag">07</span> EDUCATION &amp; MILESTONES</div>
+            <div class="m-word">CALENDAR</div>
+          </div>
+
+          <!-- 08 JOURNAL -->
+          <div class="menu-item" data-page="journal" data-num="08" data-color="#00838f" data-sub="RESUME &amp; DOCUMENTATION" role="menuitem" tabindex="0">
+            <div class="m-brush-splash"></div>
+            <div class="m-kanji">手記・ジャーナル</div>
+            <div class="m-ribbon"><span class="m-num-tag">08</span> RESUME &amp; DOCUMENTATION</div>
+            <div class="m-word">JOURNAL</div>
+          </div>
+
+          <!-- 09 SYSTEM -->
+          <div class="menu-item" data-page="system" data-num="09" data-color="#0288d1" data-sub="PREFERENCES &amp; CONTACT" role="menuitem" tabindex="0">
+            <div class="m-brush-splash"></div>
+            <div class="m-kanji">環境・システム</div>
+            <div class="m-ribbon"><span class="m-num-tag">09</span> PREFERENCES &amp; CONTACT</div>
+            <div class="m-word">SYSTEM</div>
+          </div>
+
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 3D Letter Shatter Overlay -->
+  <div class="shatter-container" id="shatterContainer"></div>
+
+  <!-- Raw Paint Brush Transition Wipe Overlay -->
+  <div class="trans-overlay" id="transOverlay">
+    <div class="wipe-black" id="wipeBlack"></div>
+    <div class="wipe-color" id="wipeColor"></div>
+    <div class="wipe-brush-slash" id="wipeBrushSlash"></div>
+  </div>
+
+  <!-- ==================== GAME SUB-MENU CONTENT SCREEN ==================== -->
+  <div class="content-screen" id="contentScreen">
+    <button class="back-btn" id="backBtn" aria-label="Return to menu">
+      <span class="b-arrow">←</span> <span class="b-text">BACK TO COMMAND</span>
+    </button>
+
+    <!-- ==================== 01 SKILL ==================== -->
+    <section class="page" id="page-skill">
+      <div class="game-page-header">
+        <div class="hdr-giant-banner">
+          <h1 class="hdr-giant-title">SKILL</h1>
+        </div>
+        <div class="hdr-sub-ribbon">
+          <span class="hdr-sub-jp">誰がスキルを使用する？</span>
+          <span class="hdr-sub-desc">TECHNICAL PROFICIENCY &amp; ARCHETYPE MASTERY</span>
+        </div>
+        <div class="hdr-chalk-line"></div>
+      </div>
+
+      <div class="game-split-layout">
+        <!-- Left: Party Member Cards (Engineering Specializations) -->
+        <div class="game-left-col">
+          <div class="member-card active" data-skill-set="backend">
+            <div class="m-brush-stroke"></div>
+            <div class="m-card-inner">
+              <div class="m-role-tag">MAIN</div>
+              <div class="m-card-content">
+                <div class="m-name">BACKEND &amp; SERVER ENGINE</div>
+                <div class="m-card-stats-row">
+                  <div class="stat-pill hp">
+                    <span class="st-lbl">EXP</span>
+                    <span class="st-val">98%</span>
+                    <div class="st-bar"><div class="st-fill" style="width: 98%;"></div></div>
+                  </div>
+                  <div class="stat-pill mp">
+                    <span class="st-lbl">LV</span>
+                    <span class="st-val">99</span>
+                    <div class="st-bar"><div class="st-fill" style="width: 99%;"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="m-archetype-badge">
+                <svg viewBox="0 0 40 40" class="arch-icon">
+                  <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                  <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1"/>
+                  <path d="M20 7 L23 18 L34 20 L23 22 L20 33 L17 22 L6 20 L17 18 Z" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="member-card" data-skill-set="frontend">
+            <div class="m-brush-stroke"></div>
+            <div class="m-card-inner">
+              <div class="m-role-tag">CLIENT</div>
+              <div class="m-card-content">
+                <div class="m-name">FRONTEND &amp; UI INTERFACE</div>
+                <div class="m-card-stats-row">
+                  <div class="stat-pill hp">
+                    <span class="st-lbl">EXP</span>
+                    <span class="st-val">90%</span>
+                    <div class="st-bar"><div class="st-fill" style="width: 90%;"></div></div>
+                  </div>
+                  <div class="stat-pill mp">
+                    <span class="st-lbl">LV</span>
+                    <span class="st-val">92</span>
+                    <div class="st-bar"><div class="st-fill" style="width: 92%;"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="m-archetype-badge">
+                <svg viewBox="0 0 40 40" class="arch-icon">
+                  <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1"/>
+                  <path d="M20 9 L28 17 L25 29 L15 29 L12 17 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                  <circle cx="20" cy="20" r="3" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="member-card" data-skill-set="tools">
+            <div class="m-brush-stroke"></div>
+            <div class="m-card-inner">
+              <div class="m-role-tag">TOOLS</div>
+              <div class="m-card-content">
+                <div class="m-name">DATABASE &amp; ENVIRONMENT</div>
+                <div class="m-card-stats-row">
+                  <div class="stat-pill hp">
+                    <span class="st-lbl">EXP</span>
+                    <span class="st-val">94%</span>
+                    <div class="st-bar"><div class="st-fill" style="width: 94%;"></div></div>
+                  </div>
+                  <div class="stat-pill mp">
+                    <span class="st-lbl">LV</span>
+                    <span class="st-val">95</span>
+                    <div class="st-bar"><div class="st-fill" style="width: 95%;"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="m-archetype-badge">
+                <svg viewBox="0 0 40 40" class="arch-icon">
+                  <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1"/>
+                  <path d="M14 14 L26 26 M26 14 L14 26" stroke="currentColor" stroke-width="2.5"/>
+                  <rect x="18" y="8" width="4" height="24" fill="currentColor"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Skill List Entries -->
+        <div class="game-right-col">
+          <div class="skill-entries-list" id="skillEntriesList">
+            <!-- Populated dynamically via JS -->
+            <div class="g-skill-row">
+              <span class="g-elem-icon phys">◈</span>
+              <span class="g-skill-name">PHP 8 &amp; Laravel 11/12</span>
+              <span class="g-skill-mp">98 PTS</span>
+            </div>
+            <div class="g-skill-row">
+              <span class="g-elem-icon wind">◇</span>
+              <span class="g-skill-name">RESTful API Design &amp; Architecture</span>
+              <span class="g-skill-mp">96 PTS</span>
+            </div>
+            <div class="g-skill-row">
+              <span class="g-elem-icon magic">◎</span>
+              <span class="g-skill-name">Node.js &amp; Express.js Backend</span>
+              <span class="g-skill-mp">90 PTS</span>
+            </div>
+            <div class="g-skill-row">
+              <span class="g-elem-icon fire">○</span>
+              <span class="g-skill-name">Python Scripting &amp; Automation</span>
+              <span class="g-skill-mp">88 PTS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 02 ITEM ==================== -->
+    <section class="page" id="page-item">
+      <div class="game-page-header">
+        <div class="hdr-giant-banner">
+          <h1 class="hdr-giant-title">ITEM</h1>
+        </div>
+        <div class="hdr-sub-ribbon">
+          <span class="hdr-sub-jp">アイテムを確認する</span>
+          <span class="hdr-sub-desc">FEATURED PRODUCTION PROJECTS &amp; ARTIFACTS</span>
+        </div>
+        <div class="hdr-chalk-line"></div>
+      </div>
+
+      <div class="item-screen-layout">
+        <!-- Left: Inventory List with Embedded Active Description -->
+        <div class="item-list-col">
+          <!-- Item 1: Grow-a-Garden -->
+          <div class="m-item-row active" data-item="0">
+            <div class="m-item-brush-bg"></div>
+            <div class="m-item-main">
+              <span class="m-item-tag new">NEW</span>
+              <span class="m-item-icon">◈</span>
+              <span class="m-item-name">Grow-a-Garden</span>
+              <span class="m-item-qty">x01</span>
+            </div>
+            <div class="m-item-embedded-desc">
+              <p class="m-desc-text">Asisten berkebun cerdas berbasis web yang mencatat siklus hidup tanaman dari penyemaian hingga panen. Dilengkapi template jadwal pintar, sistem pengingat otomatis, dan sinkronisasi kondisi cuaca harian real-time.</p>
+              <div class="m-desc-tags"><span>Laravel</span><span>TailwindCSS</span><span>MySQL</span><span>Weather API</span></div>
+              <a href="https://github.com/Apisikma123/Grow-a-garden.git" target="_blank" rel="noopener" class="m-desc-link">GITHUB REPOSITORY →</a>
+            </div>
+          </div>
+
+          <!-- Item 2: WilmarBooks -->
+          <div class="m-item-row" data-item="1">
+            <div class="m-item-brush-bg"></div>
+            <div class="m-item-main">
+              <span class="m-item-tag new">LIVE</span>
+              <span class="m-item-icon">◈</span>
+              <span class="m-item-name">WilmarBooks (Donasi Buku WBI)</span>
+              <span class="m-item-qty">x01</span>
+            </div>
+            <div class="m-item-embedded-desc">
+              <p class="m-desc-text">Platform donasi buku digital untuk perpustakaan Politeknik Wilmar Bisnis Indonesia dengan antarmuka bergaya e-commerce. Memudahkan tracking donasi buku, katalogisasi interaktif, dan administrasi donasi terpusat.</p>
+              <div class="m-desc-tags"><span>Laravel</span><span>TailwindCSS</span><span>MySQL</span><span>Live Production</span></div>
+              <a href="https://donasi-buku.wbi.ac.id" target="_blank" rel="noopener" class="m-desc-link">LIVE WEBSITE (wbi.ac.id) →</a>
+              <a href="https://github.com/Apisikma123/wilmarbuku.git" target="_blank" rel="noopener" class="m-desc-link" style="margin-left: 6px;">GITHUB REPO →</a>
+            </div>
+          </div>
+
+          <!-- Item 3: KAPI (Kereta Api Passenger & Inventory System) -->
+          <div class="m-item-row" data-item="2">
+            <div class="m-item-brush-bg"></div>
+            <div class="m-item-main">
+              <span class="m-item-tag new">NEW</span>
+              <span class="m-item-icon">◈</span>
+              <span class="m-item-name">KAPI (Kereta Api Booking System)</span>
+              <span class="m-item-qty">x01</span>
+            </div>
+            <div class="m-item-embedded-desc">
+              <p class="m-desc-text">Platform reservasi tiket kereta api. Dilengkapi denah gerbong 3D Interactive Seat Map, validasi kursi anti-overbooking, dan e-ticket boarding pass digital ber-QR Code.</p>
+              <div class="m-desc-tags"><span>Laravel</span><span>TailwindCSS</span><span>MySQL</span><span>Pest PHP</span></div>
+              <a href="https://github.com/M-RapeliHSN/KAPI.git" target="_blank" rel="noopener" class="m-desc-link">GITHUB REPOSITORY →</a>
+            </div>
+          </div>
+
+          <!-- Item 4: Inventaris WBI (Sistem Aset Kampus) -->
+          <div class="m-item-row" data-item="3">
+            <div class="m-item-brush-bg"></div>
+            <div class="m-item-main">
+              <span class="m-item-tag new">WBI</span>
+              <span class="m-item-icon">◈</span>
+              <span class="m-item-name">Inventaris WBI (Sistem Aset Kampus)</span>
+              <span class="m-item-qty">x01</span>
+            </div>
+            <div class="m-item-embedded-desc">
+              <p class="m-desc-text">Sistem manajemen inventaris dan aset kampus Politeknik WBI. Dilengkapi kontrol hak akses Admin &amp; Super Admin, tracking mutasi barang, serta pencatatan tahun anggaran aset.</p>
+              <div class="m-desc-tags"><span>Laravel</span><span>PHP</span><span>MySQL</span><span>TailwindCSS</span></div>
+              <a href="https://github.com/r4hmansun/inventartis-WBI.git" target="_blank" rel="noopener" class="m-desc-link">GITHUB REPOSITORY →</a>
+            </div>
+          </div>
+
+          <!-- Item 5: Ökiro Café (Website UMKM Company Profile) -->
+          <div class="m-item-row" data-item="4">
+            <div class="m-item-brush-bg"></div>
+            <div class="m-item-main">
+              <span class="m-item-tag new">LIVE</span>
+              <span class="m-item-icon">◈</span>
+              <span class="m-item-name">ÖKIRO CAFÉ (Company Profile &amp; Catalog)</span>
+              <span class="m-item-qty">x01</span>
+            </div>
+            <div class="m-item-embedded-desc">
+              <p class="m-desc-text">Website company profile dan katalog menu kedai kopi artisan bernuansa Japanese-Minimalist. Dilengkapi filter kategori, pencarian menu cepat, serta pemesanan instan via WhatsApp.</p>
+              <div class="m-desc-tags"><span>HTML5 / CSS3</span><span>JavaScript</span><span>WhatsApp API</span><span>Vercel</span></div>
+              <a href="https://okiro-cafe.vercel.app" target="_blank" rel="noopener" class="m-desc-link">LIVE WEBSITE (vercel.app) →</a>
+              <a href="https://github.com/M-RapeliHSN/Okiro-Cafe.git" target="_blank" rel="noopener" class="m-desc-link" style="margin-left: 6px;">GITHUB REPO →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 03 EQUIPMENT ==================== -->
+    <section class="page" id="page-equipment">
+      <div class="game-page-header">
+        <div class="hdr-giant-banner">
+          <h1 class="hdr-giant-title">EQUIPMENT</h1>
+        </div>
+        <div class="hdr-sub-ribbon">
+          <span class="hdr-sub-jp">開発環境・スタック</span>
+          <span class="hdr-sub-desc">DEVELOPMENT ENVIRONMENT, TOOLS &amp; TECH SPECIFICATIONS</span>
+        </div>
+        <div class="hdr-chalk-line"></div>
+      </div>
+
+      <div class="eq-metaphor-screen">
+        <!-- Left: Tech Stack Selector Cards -->
+        <div class="eq-member-select-col">
+          <!-- Stack 1: Core Backend (Active) -->
+          <div class="eq-member-card active" data-eq="0">
+            <div class="eq-brush-bg"></div>
+            <div class="eq-card-left">
+              <span class="eq-role-tag leader">CORE BACKEND</span>
+              <span class="eq-member-name">PHP &amp; Laravel 11/12</span>
+              <div class="eq-stats-line">
+                <span class="eq-stat-icon">◈</span><span class="eq-stat-num">RESTful API • MVC</span>
+              </div>
+            </div>
+            <div class="eq-card-mid">
+              <div class="eq-face-slit"></div>
+            </div>
+            <div class="eq-card-right">
+              <span class="eq-arch-name">Primary Framework</span>
+              <div class="eq-arch-rank">
+                <span class="eq-r-lbl">LEVEL</span>
+                <span class="eq-r-num">ADVANCED</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stack 2: Database Engine -->
+          <div class="eq-member-card" data-eq="1">
+            <div class="eq-brush-bg"></div>
+            <div class="eq-card-left">
+              <span class="eq-role-tag">DATABASE</span>
+              <span class="eq-member-name">MySQL Relational DB</span>
+              <div class="eq-stats-line">
+                <span class="eq-stat-icon">◈</span><span class="eq-stat-num">Schema Design • Queries</span>
+              </div>
+            </div>
+            <div class="eq-card-mid">
+              <div class="eq-face-slit"></div>
+            </div>
+            <div class="eq-card-right">
+              <span class="eq-arch-name">Relational Engine</span>
+              <div class="eq-arch-rank">
+                <span class="eq-r-lbl">LEVEL</span>
+                <span class="eq-r-num">PROFICIENT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stack 3: Dev Environment & Tools -->
+          <div class="eq-member-card" data-eq="2">
+            <div class="eq-brush-bg"></div>
+            <div class="eq-card-left">
+              <span class="eq-role-tag">TOOLING &amp; VCS</span>
+              <span class="eq-member-name">Git, Postman &amp; IDE</span>
+              <div class="eq-stats-line">
+                <span class="eq-stat-icon">◈</span><span class="eq-stat-num">Version Control &amp; Testing</span>
+              </div>
+            </div>
+            <div class="eq-card-mid">
+              <div class="eq-face-slit"></div>
+            </div>
+            <div class="eq-card-right">
+              <span class="eq-arch-name">Workflow Tools</span>
+              <div class="eq-arch-rank">
+                <span class="eq-r-lbl">LEVEL</span>
+                <span class="eq-r-num">DAILY USE</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stack 4: Frontend & UI Components -->
+          <div class="eq-member-card" data-eq="3">
+            <div class="eq-brush-bg"></div>
+            <div class="eq-card-left">
+              <span class="eq-role-tag guide">FRONTEND</span>
+              <span class="eq-member-name">TailwindCSS &amp; JS</span>
+              <div class="eq-stats-line">
+                <span class="eq-stat-icon">◈</span><span class="eq-stat-num">HTML5 / CSS3 / Responsive</span>
+              </div>
+            </div>
+            <div class="eq-card-mid">
+              <div class="eq-face-slit"></div>
+            </div>
+            <div class="eq-card-right">
+              <span class="eq-arch-name">UI Integration</span>
+              <div class="eq-arch-rank">
+                <span class="eq-r-lbl">LEVEL</span>
+                <span class="eq-r-num">SKILLED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Equipment Inspect Box -->
+        <div class="eq-inspect-col">
+          <div class="eq-archetype-box" id="eqArchetypeBox">
+            <div class="eq-arch-badge-top">TECH STACK SPECIFICATION &amp; WORKFLOW</div>
+            <h2 class="eq-arch-title" id="eqTitle">Backend Architecture (PHP &amp; Laravel)</h2>
+            <p class="eq-arch-desc" id="eqDesc">
+              Fokus utama pada perancangan logika bisnis backend terstruktur menggunakan PHP 8 dan framework Laravel (versi 11/12), pembuatan endpoint RESTful API terstandarisasi, routing middleware, autentikasi data aman, dan integrasi arsitektur MVC.
+            </p>
+            <div class="eq-slot-grid" id="eqSlots">
+              <div class="eq-slot-item"><span class="eq-s-label">CORE RUNTIME &amp; FRAMEWORK</span><strong class="eq-s-name">PHP 8.3 &amp; Laravel 11/12</strong><span class="eq-s-val">Primary</span></div>
+              <div class="eq-slot-item"><span class="eq-s-label">API ARCHITECTURE</span><strong class="eq-s-name">RESTful JSON Resource API</strong><span class="eq-s-val">Structured</span></div>
+              <div class="eq-slot-item"><span class="eq-s-label">DATABASE ORM</span><strong class="eq-s-name">Eloquent ORM &amp; Migrations</strong><span class="eq-s-val">Optimized</span></div>
+              <div class="eq-slot-item"><span class="eq-s-label">SECURITY &amp; MIDDLEWARE</span><strong class="eq-s-name">Sanctum Auth &amp; Validation</strong><span class="eq-s-val">Secured</span></div>
+            </div>
+            <div class="eq-btn-prompts">
+              <span class="eq-p-btn"><span class="k-btn">◈</span> Production Ready</span>
+              <span class="eq-p-btn"><span class="k-btn">◈</span> Clean MVC Architecture</span>
+              <span class="eq-p-btn"><span class="k-btn">◈</span> Scalable Codebase</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 04 PARTY ==================== -->
+    <section class="page" id="page-party">
+      <div class="game-page-header">
+        <div class="hdr-giant-banner">
+          <h1 class="hdr-giant-title">PARTY</h1>
+        </div>
+        <div class="hdr-sub-ribbon">
+          <span class="hdr-sub-jp">開発者プロフィール</span>
+          <span class="hdr-sub-desc">LEAD DEVELOPER PROFILE &amp; ENGINEERING DOSSIER</span>
+        </div>
+        <div class="hdr-chalk-line"></div>
+      </div>
+
+      <div class="party-game-view">
+        <div class="p-card-hero">
+          <div class="p-hero-top">
+            <div class="p-hero-lvl">LEAD PROFILE</div>
+            <div class="p-hero-badge">BACKEND ENGINEER</div>
+          </div>
+          <h2 class="p-hero-name">MUHAMMAD RAFFLY HUSAINI</h2>
+          <div class="p-hero-role">BACKEND ENGINEER / RPL STUDENT • MEDAN, INDONESIA</div>
+          <p class="p-hero-bio">
+            Backend Engineer muda asal Medan dengan fokus utama dalam merancang arsitektur server terstruktur, RESTful API berperforma tinggi, dan perancangan skema basis data MySQL yang optimal. Berpengalaman membangun logika bisnis aplikasi web modern, autentikasi data aman, dan integrasi full-stack yang handal.
+          </p>
+          <div class="p-stat-bars">
+            <div class="p-bar-item">
+              <span>CORE SPECIALIZATION</span>
+              <strong>Backend &amp; Laravel</strong>
+              <p>PHP 8 • Laravel 11/12 • Clean MVC</p>
+            </div>
+            <div class="p-bar-item">
+              <span>DATABASE MANAGEMENT</span>
+              <strong>MySQL Database</strong>
+              <p>Relational Modeling • Query Indexing</p>
+            </div>
+            <div class="p-bar-item">
+              <span>API ARCHITECTURE</span>
+              <strong>RESTful API Service</strong>
+              <p>JSON Controller • Endpoint Testing</p>
+            </div>
+            <div class="p-bar-item">
+              <span>WORKFLOW &amp; TOOLS</span>
+              <strong>Git &amp; Postman Suite</strong>
+              <p>Version Control • Testing &amp; Debugging</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 05 FOLLOWER ==================== -->
+    <section class="page" id="page-follower">
+      <div class="game-page-header">
+        <div class="hdr-giant-banner">
+          <h1 class="hdr-giant-title">FOLLOWER</h1>
+        </div>
+        <div class="hdr-sub-ribbon">
+          <span class="hdr-sub-jp">支援者との絆</span>
+          <span class="hdr-sub-desc">SUPPORT BONDS, CONTACTS &amp; SOCIAL REACH</span>
+        </div>
+        <div class="hdr-chalk-line"></div>
+      </div>
+
+      <div class="follower-list-metaphor">
+        <!-- Entry 1: Direct Email -->
+        <a href="mailto:raflyhusaini0290@gmail.com" class="f-entry active" target="_blank" rel="noopener">
+          <div class="f-brush-bg"></div>
+          <div class="f-portrait">
+            <svg viewBox="0 0 40 40" class="f-portrait-icon"><circle cx="20" cy="15" r="8" fill="rgba(255,255,255,0.7)" stroke="none"/><ellipse cx="20" cy="35" rx="14" ry="10" fill="rgba(255,255,255,0.5)" stroke="none"/></svg>
+          </div>
+          <div class="f-info">
+            <div class="f-status-tag">DIRECT</div>
+            <div class="f-name">EMAIL INQUIRY</div>
+            <div class="f-subtitle">raflyhusaini0290@gmail.com — Hubungi untuk kolaborasi &amp; project</div>
+          </div>
+          <div class="f-role-tag">Official Mail</div>
+          <div class="f-action-badge">
+            <span class="f-act-icon">✉</span>
+            <span class="f-act-text">SEND EMAIL</span>
+          </div>
+        </a>
+
+        <!-- Entry 2: GitHub -->
+        <a href="https://github.com/M-RapeliHSN" class="f-entry" target="_blank" rel="noopener">
+          <div class="f-brush-bg"></div>
+          <div class="f-portrait">
+            <svg viewBox="0 0 40 40" class="f-portrait-icon"><circle cx="20" cy="15" r="8" fill="rgba(255,255,255,0.7)" stroke="none"/><ellipse cx="20" cy="35" rx="14" ry="10" fill="rgba(255,255,255,0.5)" stroke="none"/></svg>
+          </div>
+          <div class="f-info">
+            <div class="f-status-tag">FORGE</div>
+            <div class="f-name">GITHUB REPOSITORIES</div>
+            <div class="f-subtitle">github.com/M-RapeliHSN — Repositori project &amp; source code</div>
+          </div>
+          <div class="f-role-tag">Source Code</div>
+          <div class="f-action-badge">
+            <span class="f-act-icon">↗</span>
+            <span class="f-act-text">VIEW REPO</span>
+          </div>
+        </a>
+
+        <!-- Entry 3: WhatsApp -->
+        <a href="https://wa.me/6283846480183" class="f-entry" target="_blank" rel="noopener">
+          <div class="f-brush-bg"></div>
+          <div class="f-portrait">
+            <svg viewBox="0 0 40 40" class="f-portrait-icon"><circle cx="20" cy="15" r="8" fill="rgba(255,255,255,0.7)" stroke="none"/><ellipse cx="20" cy="35" rx="14" ry="10" fill="rgba(255,255,255,0.5)" stroke="none"/></svg>
+          </div>
+          <div class="f-info">
+            <div class="f-name">WHATSAPP CONTACT</div>
+            <div class="f-subtitle">+62 838 4648 0183 — Quick chat &amp; fast response</div>
+          </div>
+          <div class="f-role-tag">Instant Chat</div>
+          <div class="f-action-badge">
+            <span class="f-act-icon">💬</span>
+            <span class="f-act-text">QUICK CHAT</span>
+          </div>
+        </a>
+
+        <!-- Entry 4: Instagram -->
+        <a href="https://instagram.com/blanks_raa" class="f-entry" target="_blank" rel="noopener">
+          <div class="f-brush-bg"></div>
+          <div class="f-portrait">
+            <svg viewBox="0 0 40 40" class="f-portrait-icon"><circle cx="20" cy="15" r="8" fill="rgba(255,255,255,0.7)" stroke="none"/><ellipse cx="20" cy="35" rx="14" ry="10" fill="rgba(255,255,255,0.5)" stroke="none"/></svg>
+          </div>
+          <div class="f-info">
+            <div class="f-name">INSTAGRAM PROFILE</div>
+            <div class="f-subtitle">@blanks_raa — Social updates &amp; creative highlights</div>
+          </div>
+          <div class="f-role-tag">Social</div>
+          <div class="f-action-badge">
+            <span class="f-act-icon">@</span>
+            <span class="f-act-text">VISIT PROFILE</span>
+          </div>
+        </a>
+
+        <!-- Entry 5: Location -->
+        <div class="f-entry">
+          <div class="f-brush-bg"></div>
+          <div class="f-portrait">
+            <svg viewBox="0 0 40 40" class="f-portrait-icon"><circle cx="20" cy="15" r="8" fill="rgba(255,255,255,0.7)" stroke="none"/><ellipse cx="20" cy="35" rx="14" ry="10" fill="rgba(255,255,255,0.5)" stroke="none"/></svg>
+          </div>
+          <div class="f-info">
+            <div class="f-name">LOCATION &amp; AVAILABILITY</div>
+            <div class="f-subtitle">Medan, Indonesia — Remote &amp; Project Collaborations Ready</div>
+          </div>
+          <div class="f-role-tag">Availability</div>
+          <div class="f-action-badge ready">
+            <span class="f-act-icon">●</span>
+            <span class="f-act-text">AVAILABLE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 06 QUEST ==================== -->
+    <section class="page" id="page-quest">
+      <div class="game-page-header">
+        <div class="hdr-giant-banner">
+          <h1 class="hdr-giant-title">QUEST</h1>
+        </div>
+        <div class="hdr-sub-ribbon">
+          <span class="hdr-sub-jp">依頼一覧</span>
+          <span class="hdr-sub-desc">PROFESSIONAL WORK HISTORY &amp; EXPERIENCES</span>
+        </div>
+        <div class="hdr-chalk-line"></div>
+      </div>
+
+      <div class="quest-game-list">
+        <!-- Quest 1: PKL Politeknik Wilmar Bisnis Indonesia -->
+        <div class="q-banner active">
+          <div class="q-tag">MAIN QUEST [ACTIVE / RECENT]</div>
+          <h2>Backend Engineer Intern — Politeknik Wilmar Bisnis Indonesia (WBI)</h2>
+          <div class="q-date">2024 — SEKARANG</div>
+          <p>Bergabung sebagai bagian dari Tim IT Politeknik Wilmar Bisnis Indonesia, berperan spesifik sebagai Backend Engineer dalam merancang arsitektur API, integrasi basis data MySQL, serta mengembangkan website platform donasi buku perpustakaan WilmarBooks.</p>
+        </div>
+
+        <!-- Quest 2: Grow-a-Garden & Web Engineering Projects -->
+        <div class="q-banner done">
+          <div class="q-tag">QUEST COMPLETED</div>
+          <h2>Lead Developer &amp; Creator — Grow-a-Garden Web App</h2>
+          <div class="q-date">2024</div>
+          <p>Mengembangkan aplikasi asisten berkebun dari tahap perancangan basis data hingga implementasi fitur reminder cerdas adaptif cuaca dan manajemen siklus tanaman menggunakan Laravel dan MySQL.</p>
+        </div>
+
+        <!-- Quest 3: Software Engineering Practice -->
+        <div class="q-banner done">
+          <div class="q-tag">GUILD QUEST COMPLETED</div>
+          <h2>Software Engineering Student — SMK Telkom 1 Medan</h2>
+          <div class="q-date">2024 — 2026</div>
+          <p>Mendalami rekayasa perangkat lunak terapan, pemodelan relasional database MySQL, clean architecture MVC, version control Git, dan perancangan REST API terstruktur.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 07 CALENDAR ==================== -->
+    <section class="page" id="page-calendar">
+      <div class="game-page-header">
+        <div class="hdr-giant-banner">
+          <h1 class="hdr-giant-title">CALENDAR</h1>
+        </div>
+        <div class="hdr-sub-ribbon">
+          <span class="hdr-sub-jp">日程と経歴</span>
+          <span class="hdr-sub-desc">ACADEMIC TIMELINE &amp; CAREER MILESTONES</span>
+        </div>
+        <div class="hdr-chalk-line"></div>
+      </div>
+
+      <div class="cal-split-layout">
+        <!-- Left: Education & Milestone List -->
+        <div class="cal-left-list">
+          <div class="cal-entry active" data-cal="0">
+            <div class="cal-brush-bg"></div>
+            <div class="cal-entry-year">2024</div>
+            <div class="cal-entry-info">
+              <h3 class="cal-entry-title">REKAYASA PERANGKAT LUNAK (RPL)</h3>
+              <p class="cal-entry-sub">SMK Telkom 1 Medan (2024 — 2026)</p>
+            </div>
+            <div class="cal-entry-badge">STUDENT</div>
+          </div>
+
+          <div class="cal-entry" data-cal="1">
+            <div class="cal-brush-bg"></div>
+            <div class="cal-entry-year">2024</div>
+            <div class="cal-entry-info">
+              <h3 class="cal-entry-title">IT INTERN (BACKEND ENGINEER)</h3>
+              <p class="cal-entry-sub">Politeknik Wilmar Bisnis Indonesia</p>
+            </div>
+            <div class="cal-entry-badge">INTERNSHIP</div>
+          </div>
+
+          <div class="cal-entry" data-cal="2">
+            <div class="cal-brush-bg"></div>
+            <div class="cal-entry-year">2025</div>
+            <div class="cal-entry-info">
+              <h3 class="cal-entry-title">BACKEND &amp; API MASTERY</h3>
+              <p class="cal-entry-sub">Laravel &amp; MySQL Application Engineering</p>
+            </div>
+            <div class="cal-entry-badge">MASTERY</div>
+          </div>
+
+          <div class="cal-entry" data-cal="3">
+            <div class="cal-brush-bg"></div>
+            <div class="cal-entry-year">2026</div>
+            <div class="cal-entry-info">
+              <h3 class="cal-entry-title">GRADUATION &amp; NEXT HORIZON</h3>
+              <p class="cal-entry-sub">Future Career in Enterprise Backend Engineering</p>
+            </div>
+            <div class="cal-entry-badge">FUTURE</div>
+          </div>
+        </div>
+
+        <!-- Right: Milestone Detail View Card -->
+        <div class="cal-right-detail">
+          <div class="cal-detail-card" id="calDetailCard">
+            <div class="cal-detail-header">
+              <div class="cal-d-year" id="calDYear">2024</div>
+              <div class="cal-d-tag" id="calDTag">FORMAL EDUCATION</div>
+            </div>
+            <h2 class="cal-d-title" id="calDTitle">REKAYASA PERANGKAT LUNAK</h2>
+            <div class="cal-d-inst" id="calDInst">SMK Telkom 1 Medan • Periode 2024 — 2026</div>
+            <p class="cal-d-desc" id="calDDesc">
+              Menempuh pendidikan vokasi kejuruan Rekayasa Perangkat Lunak (RPL) di SMK Telkom 1 Medan dengan fokus pembelajaran mendalam pada Logika Algoritma, Pemrograman Backend, Basis Data MySQL, Pemrograman Berorientasi Objek (OOP), dan Pengembangan Web Modern.
+            </p>
+            <div class="cal-d-competencies" id="calDComp">
+              <span>Rekayasa Perangkat Lunak</span>
+              <span>PHP &amp; Laravel</span>
+              <span>MySQL Database</span>
+              <span>REST API</span>
+              <span>Git &amp; GitHub</span>
+            </div>
+            <div class="cal-d-footer">
+              <span class="cal-d-status">STATUS: ACTIVE STUDENT (RPL)</span>
+              <span class="cal-d-cred">MEDAN, INDONESIA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 08 JOURNAL ==================== -->
+    <section class="page" id="page-journal">
+      <div class="game-page-header">
+        <div class="hdr-giant-banner">
+          <h1 class="hdr-giant-title">JOURNAL</h1>
+        </div>
+        <div class="hdr-sub-ribbon">
+          <span class="hdr-sub-jp">手記を確認する</span>
+          <span class="hdr-sub-desc">TECHNICAL DOCUMENTATION &amp; DEV LOGS</span>
+        </div>
+        <div class="hdr-chalk-line"></div>
+      </div>
+
+      <div class="journal-game-card">
+        <div class="j-badge">PORTFOLIO RECORD READY</div>
+        <p>Dokumen lengkap riwayat pendidikan, rekam jejak proyek web aplikasi nyata (Grow-a-Garden &amp; WilmarBooks), keahlian teknis backend, dan kontak resmi terangkum dalam Curriculum Vitae.</p>
+        <a href="mailto:raflyhusaini0290@gmail.com" class="j-btn">REQUEST OFFICIAL CV (PDF) →</a>
+      </div>
+    </section>
+
+    <!-- ==================== 09 SYSTEM ==================== -->
+    <section class="page" id="page-system">
+      <div class="game-page-header">
+        <div class="hdr-giant-banner">
+          <h1 class="hdr-giant-title">SYSTEM</h1>
+        </div>
+        <div class="hdr-sub-ribbon">
+          <span class="hdr-sub-jp">システム設定</span>
+          <span class="hdr-sub-desc">SYSTEM PREFERENCES &amp; DIRECT CONNECT</span>
+        </div>
+        <div class="hdr-chalk-line"></div>
+      </div>
+
+      <div class="system-game-menu">
+        <div class="sys-item" id="sysBgmItem" style="cursor: pointer;">
+          <div>
+            <strong>BACKGROUND MUSIC (BGM)</strong>
+            <p>Shoji Meguro — Metaphor: ReFantazio • Utopia (32% Ambience)</p>
+          </div>
+          <span class="sys-state" id="sysBgmState">PLAYING</span>
+        </div>
+        <div class="sys-item">
+          <div><strong>SYNTHESIZED JRPG WEB AUDIO SFX</strong><p>0ms Latency tactile Web Audio API sound synthesis</p></div>
+          <span class="sys-state">ENABLED</span>
+        </div>
+        <div class="sys-item">
+          <div><strong>3D LETTER SHATTER PARTICLES</strong><p>High-performance canvas letter explosion physics</p></div>
+          <span class="sys-state">ACTIVE</span>
+        </div>
+        <div class="sys-item">
+          <div><strong>EMAIL INQUIRY</strong><p>Send direct project message to raflyhusaini0290@gmail.com</p></div>
+          <a href="mailto:raflyhusaini0290@gmail.com" class="sys-dl-btn">CONTACT RAFFLY</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
