@@ -1,5 +1,5 @@
-/* ============================================================
-   METAPORTO — main.js
+﻿/* ============================================================
+   METAPORTO â€” main.js
    Metaphor: ReFantazio UI Interactions, Web Audio API SFX & 3D Shatter
    ============================================================ */
 
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     skill: 'assets/38752648-bd78-49a8-b9ea-c31f585c702f.png',
     item: 'assets/bc0323a7-d167-4af9-bded-0374ed78f99e.png',
     equipment: 'assets/e91f5449-4afe-4b57-b81c-99fabd80865d.png',
-    party: 'assets/ChatGPT Image Sep 14, 2026, 10_25_55 AM.png',
+    party: 'assets/party-bg.png',
     follower: 'assets/f7cef99c-c822-41e4-ba8b-b53242a2bc18.png',
     quest: 'assets/614f9d7a-b1a0-4703-b9f7-4984b840e5ed.png',
     journal: 'assets/8459fa4f-105b-4515-8beb-0a3ab52dc832.png',
@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Soft click
       createNoiseBurst(0.004, 2800, 1, 0.08, now);
 
-      // Reverse sweep: filter goes high→low (retracting feel)
+      // Reverse sweep: filter goes highâ†’low (retracting feel)
       const sweepLen = Math.floor(audioCtx.sampleRate * 0.06);
       const sweepBuf = audioCtx.createBuffer(1, sweepLen, audioCtx.sampleRate);
       const sweepData = sweepBuf.getChannelData(0);
@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==================== SVG CALLIGRAPHIC BRUSH STROKE INJECTION ====================
-  // Real organic Bézier curve brush strokes — NOT clip-path polygon shapes
+  // Real organic BÃ©zier curve brush strokes â€” NOT clip-path polygon shapes
 
   function injectMenuBrushSVGs() {
     const splashes = document.querySelectorAll('.m-brush-splash');
@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function injectWipeSVGs() {
-    // Black wipe — massive brush blade with organic Bézier leading edge
+    // Black wipe â€” massive brush blade with organic BÃ©zier leading edge
     const wipeBlackEl = document.getElementById('wipeBlack');
     if (wipeBlackEl) {
       wipeBlackEl.innerHTML = `
@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </svg>`;
     }
 
-    // Color wipe — slightly different organic edge profile
+    // Color wipe â€” slightly different organic edge profile
     const wipeColorEl = document.getElementById('wipeColor');
     if (wipeColorEl) {
       wipeColorEl.innerHTML = `
@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </svg>`;
     }
 
-    // White brush slash accent — thin dramatic slash
+    // White brush slash accent â€” thin dramatic slash
     const wipeBrushEl = document.getElementById('wipeBrushSlash');
     if (wipeBrushEl) {
       wipeBrushEl.innerHTML = `
@@ -530,7 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>`;
     }
 
-    // Skill member cards — just inject SVG, let CSS handle show/hide
+    // Skill member cards â€” just inject SVG, let CSS handle show/hide
     document.querySelectorAll('.m-brush-stroke').forEach(el => {
       el.innerHTML = brushSVG('#ab47bc');
     });
@@ -694,22 +694,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==================== SKILL PAGE PARTY CARD SWITCHER ====================
   const skillSets = {
     backend: [
-      { icon: '◈', elemClass: 'phys', name: 'PHP 8 & Laravel 11/12', mp: '98 PTS' },
-      { icon: '◇', elemClass: 'wind', name: 'RESTful API Architecture', mp: '96 PTS' },
-      { icon: '◎', elemClass: 'magic', name: 'Node.js & Express.js Backend', mp: '90 PTS' },
-      { icon: '○', elemClass: 'fire', name: 'Python Scripting & Automation', mp: '88 PTS' }
+      { icon: 'â—ˆ', elemClass: 'phys', name: 'PHP 8 & Laravel 11/12', mp: '98 PTS' },
+      { icon: 'â—‡', elemClass: 'wind', name: 'RESTful API Architecture', mp: '96 PTS' },
+      { icon: 'â—Ž', elemClass: 'magic', name: 'Node.js & Express.js Backend', mp: '90 PTS' },
+      { icon: 'â—‹', elemClass: 'fire', name: 'Python Scripting & Automation', mp: '88 PTS' }
     ],
     frontend: [
-      { icon: '◈', elemClass: 'phys', name: 'HTML5 / CSS3 / JavaScript', mp: '94 PTS' },
-      { icon: '○', elemClass: 'fire', name: 'TailwindCSS & Responsive UI/UX', mp: '96 PTS' },
-      { icon: '◇', elemClass: 'wind', name: 'React.js & Next.js Interface', mp: '88 PTS' },
-      { icon: '△', elemClass: 'ice', name: 'Vue.js & Laravel Blade Components', mp: '90 PTS' }
+      { icon: 'â—ˆ', elemClass: 'phys', name: 'HTML5 / CSS3 / JavaScript', mp: '94 PTS' },
+      { icon: 'â—‹', elemClass: 'fire', name: 'TailwindCSS & Responsive UI/UX', mp: '96 PTS' },
+      { icon: 'â—‡', elemClass: 'wind', name: 'React.js & Next.js Interface', mp: '88 PTS' },
+      { icon: 'â–³', elemClass: 'ice', name: 'Vue.js & Laravel Blade Components', mp: '90 PTS' }
     ],
     tools: [
-      { icon: '◈', elemClass: 'tool', name: 'MySQL Relational Database', mp: '96 PTS' },
-      { icon: '◎', elemClass: 'magic', name: 'Antigravity IDE Workflow', mp: '98 PTS' },
-      { icon: '◇', elemClass: 'wind', name: 'Git & GitHub Version Control', mp: '95 PTS' },
-      { icon: '△', elemClass: 'phys', name: 'Postman API Testing & Debugging', mp: '94 PTS' }
+      { icon: 'â—ˆ', elemClass: 'tool', name: 'MySQL Relational Database', mp: '96 PTS' },
+      { icon: 'â—Ž', elemClass: 'magic', name: 'Antigravity IDE Workflow', mp: '98 PTS' },
+      { icon: 'â—‡', elemClass: 'wind', name: 'Git & GitHub Version Control', mp: '95 PTS' },
+      { icon: 'â–³', elemClass: 'phys', name: 'Postman API Testing & Debugging', mp: '94 PTS' }
     ]
   };
 
@@ -847,7 +847,7 @@ document.addEventListener('DOMContentLoaded', () => {
       year: '2024',
       tag: 'FORMAL EDUCATION',
       title: 'REKAYASA PERANGKAT LUNAK (RPL)',
-      inst: 'SMK Telkom 1 Medan • Periode 2024 — Sekarang',
+      inst: 'SMK Telkom 1 Medan â€¢ Periode 2024 â€” Sekarang',
       desc: 'Menempuh pendidikan vokasi kejuruan Rekayasa Perangkat Lunak (RPL) di SMK Telkom 1 Medan dengan fokus pembelajaran mendalam pada Logika Algoritma, Pemrograman Backend, Basis Data MySQL, Pemrograman Berorientasi Objek (OOP), dan Pengembangan Web Modern.',
       comp: ['Rekayasa Perangkat Lunak', 'PHP & Laravel', 'MySQL Database', 'REST API', 'Git & GitHub']
     }
@@ -1069,7 +1069,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const stencilWords = [
       '01', '02', '03', '04', '05', '06', '07', '08', '09',
       'COMMAND', 'REFANTAZIO', 'ARCHETYPE', 'EXP', 'MAG', 'STR',
-      'LV.99', '技・スキル', '命', '斬', '魔', 'IV', 'VIII'
+      'LV.99', 'æŠ€ãƒ»ã‚¹ã‚­ãƒ«', 'å‘½', 'æ–¬', 'é­”', 'IV', 'VIII'
     ];
 
     function spawnCollageShape() {
