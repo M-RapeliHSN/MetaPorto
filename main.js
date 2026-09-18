@@ -846,34 +846,10 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       year: '2024',
       tag: 'FORMAL EDUCATION',
-      title: 'REKAYASA PERANGKAT LUNAK',
-      inst: 'SMK Telkom 1 Medan • Periode 2024 — 2026',
+      title: 'REKAYASA PERANGKAT LUNAK (RPL)',
+      inst: 'SMK Telkom 1 Medan • Periode 2024 — Sekarang',
       desc: 'Menempuh pendidikan vokasi kejuruan Rekayasa Perangkat Lunak (RPL) di SMK Telkom 1 Medan dengan fokus pembelajaran mendalam pada Logika Algoritma, Pemrograman Backend, Basis Data MySQL, Pemrograman Berorientasi Objek (OOP), dan Pengembangan Web Modern.',
       comp: ['Rekayasa Perangkat Lunak', 'PHP & Laravel', 'MySQL Database', 'REST API', 'Git & GitHub']
-    },
-    {
-      year: '2024',
-      tag: 'INTERNSHIP EXPERIENCE',
-      title: 'IT INTERN (BACKEND ENGINEER)',
-      inst: 'Politeknik Wilmar Bisnis Indonesia (WBI) • IT Department',
-      desc: 'Melaksanakan Praktik Kerja Lapangan (PKL) sebagai Backend Engineer di Politeknik Wilmar Bisnis Indonesia. Bertanggung jawab merancang arsitektur API, integrasi basis data MySQL, dan membangun website donasi buku perpustakaan WilmarBooks.',
-      comp: ['Backend Architecture', 'Laravel Framework', 'MySQL Integration', 'RESTful API', 'Production Deployment']
-    },
-    {
-      year: '2025',
-      tag: 'TECHNICAL MASTERY',
-      title: 'BACKEND & API MASTERY',
-      inst: 'Advanced Full-Scale Backend Development Track',
-      desc: 'Pengembangan berkelanjutan dalam merancang arsitektur server terdistribusi, pembuatan REST API dengan performa tinggi, sistem autentikasi aman, dan pemodelan database relational kompleks.',
-      comp: ['Laravel 11/12', 'Database Normalization', 'API Security', 'Clean Code MVC', 'TailwindCSS']
-    },
-    {
-      year: '2026',
-      tag: 'FUTURE HORIZON',
-      title: 'GRADUATION & CAREER HORIZON',
-      inst: 'Future Career in Professional Backend & Software Engineering',
-      desc: 'Target kelulusan dari SMK Telkom 1 Medan dengan portofolio backend kuat dan kesiapan penuh untuk berkontribusi dalam industri teknologi skala profesional dan enterprise.',
-      comp: ['Professional Software Engineering', 'Enterprise Backend', 'System Scalability', 'Collaboration']
     }
   ];
 
