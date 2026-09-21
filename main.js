@@ -894,8 +894,9 @@ document.addEventListener('DOMContentLoaded', () => {
       height = inkCanvas.height = window.innerHeight;
     });
 
+    const isMobile = window.innerWidth <= 768;
     const particles = [];
-    const particleCount = 45;
+    const particleCount = isMobile ? 18 : 45;
     const colors = [
       'rgba(211, 47, 47, 0.45)',
       'rgba(251, 192, 45, 0.35)',
@@ -935,8 +936,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = p.color;
+        if (!isMobile) {
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = p.color;
+        }
         ctx.fill();
       });
 
@@ -1089,23 +1092,24 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const stackRect = menuStack.getBoundingClientRect();
-      const centerY = stackRect.top + stackRect.height / 2;
+      // Fast layout-free calculation using scrollTop and item offset
+      const currentScroll = menuStack.scrollTop;
+      const targetCenter = currentScroll + menuStack.clientHeight / 2;
 
       let closestItem = null;
       let closestIdx = 0;
       let closestDist = Infinity;
 
-      menuItems.forEach((item, idx) => {
-        const rect = item.getBoundingClientRect();
-        const itemCenterY = rect.top + rect.height / 2;
-        const dist = Math.abs(itemCenterY - centerY);
+      for (let idx = 0; idx < menuItems.length; idx++) {
+        const item = menuItems[idx];
+        const itemCenter = item.offsetTop + item.offsetHeight / 2;
+        const dist = Math.abs(itemCenter - targetCenter);
         if (dist < closestDist) {
           closestDist = dist;
           closestItem = item;
           closestIdx = idx;
         }
-      });
+      }
 
       if (closestItem && closestIdx !== lastFocusedIndex) {
         lastFocusedIndex = closestIdx;
@@ -1132,8 +1136,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (commandBadge) {
           commandBadge.classList.remove('bump');
-          void commandBadge.offsetWidth;
-          commandBadge.classList.add('bump');
+          requestAnimationFrame(() => {
+            commandBadge.classList.add('bump');
+          });
         }
       }
     }
@@ -1167,7 +1172,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Generates unpredictable, subtle semi-transparent paper/ink/print overlays
   // that flash into view at irregular intervals and locations without glow/particles.
   function initEditorialCollage() {
-    if (!collageLayer) return;
+    if (!collageLayer || window.innerWidth <= 768) return;
 
     const shapeClasses = [
       'c-paper-tear',

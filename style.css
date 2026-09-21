@@ -2476,6 +2476,8 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
     z-index: 5;
+    will-change: scroll-position;
+    transform: translateZ(0);
   }
 
   .menu-stack::-webkit-scrollbar {
@@ -2485,7 +2487,7 @@ body {
   /* Base Menu Item on Mobile Focus Reel */
   .menu-item {
     scroll-snap-align: center;
-    scroll-snap-stop: always;
+    scroll-snap-stop: normal;
     position: relative;
     cursor: pointer;
     outline: none;
@@ -2493,12 +2495,11 @@ body {
     display: block;
     width: fit-content;
     transform-origin: left center;
-    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 220ms ease,
-                filter 220ms ease;
-    opacity: 0.32;
-    transform: scale(0.76) rotate(-3deg) skewX(-7deg);
-    filter: blur(0.5px);
+    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 160ms ease;
+    opacity: 0.35;
+    transform: scale(0.76) rotate(-3deg) skewX(-7deg) translateZ(0);
+    will-change: transform, opacity;
     user-select: none;
   }
 
@@ -2516,7 +2517,7 @@ body {
   /* IN-FOCUS ACTIVE ITEM: Raksasa, Tajam, Menyala Spektakuler! */
   .menu-item.is-focused {
     opacity: 1 !important;
-    transform: scale(1.16) rotate(-5deg) skewX(-11deg) translateX(14px) !important;
+    transform: scale(1.16) rotate(-5deg) skewX(-11deg) translateX(14px) translateZ(0) !important;
     filter: none !important;
     z-index: 10;
   }
@@ -2533,7 +2534,8 @@ body {
 
   .menu-item.is-focused .m-brush-splash {
     opacity: 0.95 !important;
-    transform: scale(1.08) skewX(-14deg) !important;
+    transform: scale(1.08) skewX(-14deg) translateZ(0) !important;
+    will-change: transform, opacity;
   }
 
   .menu-item.is-focused .m-kanji {
