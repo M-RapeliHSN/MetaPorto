@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    METAPORTO â€” main.js
    Metaphor: ReFantazio UI Interactions, Web Audio API SFX & 3D Shatter
    ============================================================ */
@@ -678,6 +678,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (commandBadge) commandBadge.style.display = '';
       currentPage = null;
 
+      if (window.innerWidth <= 768 && window.__updateMobileFocus) {
+        setTimeout(() => {
+          window.__updateMobileFocus(false);
+        }, 50);
+      }
+
       wipeBlack.className = 'wipe-black out';
       wipeColor.className = 'wipe-color out';
       if (wipeBrushSlash) wipeBrushSlash.className = 'wipe-brush-slash out';
@@ -967,7 +973,14 @@ document.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('mouseenter', handleHover);
     item.addEventListener('focus', handleHover);
 
-    item.addEventListener('click', () => {
+    item.addEventListener('click', (e) => {
+      // Mobile Kinetic Focus Wheel: if tapped item is not centered/focused yet, snap to center first!
+      if (window.innerWidth <= 768 && !item.classList.contains('is-focused')) {
+        e.preventDefault();
+        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
       playEnterSFX();
       triggerLetterShatter(item);
 
@@ -1023,20 +1036,32 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowDown' || e.key === 's') {
       e.preventDefault();
       focusedMenuIndex = (focusedMenuIndex + 1) % menuItems.length;
-      menuItems[focusedMenuIndex].focus();
-      menuItems[focusedMenuIndex].dispatchEvent(new Event('mouseenter'));
+      if (window.innerWidth <= 768) {
+        menuItems[focusedMenuIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        menuItems[focusedMenuIndex].focus();
+        menuItems[focusedMenuIndex].dispatchEvent(new Event('mouseenter'));
+      }
     } else if (e.key === 'ArrowUp' || e.key === 'w') {
       e.preventDefault();
       focusedMenuIndex = (focusedMenuIndex - 1 + menuItems.length) % menuItems.length;
-      menuItems[focusedMenuIndex].focus();
-      menuItems[focusedMenuIndex].dispatchEvent(new Event('mouseenter'));
+      if (window.innerWidth <= 768) {
+        menuItems[focusedMenuIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        menuItems[focusedMenuIndex].focus();
+        menuItems[focusedMenuIndex].dispatchEvent(new Event('mouseenter'));
+      }
     } else if (e.key >= '1' && e.key <= '9') {
       const idx = parseInt(e.key, 10) - 1;
       if (menuItems[idx]) {
         e.preventDefault();
         focusedMenuIndex = idx;
-        menuItems[idx].focus();
-        menuItems[idx].click();
+        if (window.innerWidth <= 768) {
+          menuItems[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          menuItems[idx].focus();
+          menuItems[idx].click();
+        }
       }
     }
   });
@@ -1049,6 +1074,94 @@ document.addEventListener('DOMContentLoaded', () => {
       navigateHome();
     }
   });
+
+  // ==================== MOBILE METAPHOR KINETIC FOCUS WHEEL ====================
+  function initMobileFocusWheel() {
+    const menuStack = document.querySelector('.menu-stack');
+    if (!menuStack || !menuItems.length) return;
+
+    let lastFocusedIndex = -1;
+
+    function updateFocus(playAudio = true) {
+      if (window.innerWidth > 768) {
+        menuItems.forEach(item => item.classList.remove('is-focused'));
+        lastFocusedIndex = -1;
+        return;
+      }
+
+      const stackRect = menuStack.getBoundingClientRect();
+      const centerY = stackRect.top + stackRect.height / 2;
+
+      let closestItem = null;
+      let closestIdx = 0;
+      let closestDist = Infinity;
+
+      menuItems.forEach((item, idx) => {
+        const rect = item.getBoundingClientRect();
+        const itemCenterY = rect.top + rect.height / 2;
+        const dist = Math.abs(itemCenterY - centerY);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestItem = item;
+          closestIdx = idx;
+        }
+      });
+
+      if (closestItem && closestIdx !== lastFocusedIndex) {
+        lastFocusedIndex = closestIdx;
+        focusedMenuIndex = closestIdx;
+
+        menuItems.forEach(item => item.classList.remove('is-focused'));
+        closestItem.classList.add('is-focused');
+
+        if (playAudio) {
+          playHoverSFX();
+        }
+
+        // Synchronize top-right COMMAND badge
+        const num = closestItem.dataset.num || '01';
+        const d0 = num.charAt(0) || '0';
+        const d1 = num.charAt(1) || '1';
+
+        if (cmdDigitZeroSvg) cmdDigitZeroSvg.textContent = d0;
+        if (cmdDigitValSvg) {
+          cmdDigitValSvg.textContent = d1;
+          cmdDigitValSvg.style.opacity = '0.4';
+          setTimeout(() => { cmdDigitValSvg.style.opacity = '1'; }, 90);
+        }
+
+        if (commandBadge) {
+          commandBadge.classList.remove('bump');
+          void commandBadge.offsetWidth;
+          commandBadge.classList.add('bump');
+        }
+      }
+    }
+
+    let scrollRaf = null;
+    menuStack.addEventListener('scroll', () => {
+      if (!scrollRaf) {
+        scrollRaf = requestAnimationFrame(() => {
+          updateFocus(true);
+          scrollRaf = null;
+        });
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      updateFocus(false);
+    });
+
+    if (window.innerWidth <= 768) {
+      setTimeout(() => {
+        updateFocus(false);
+      }, 80);
+    }
+
+    window.__updateMobileFocus = updateFocus;
+  }
+
+  initMobileFocusWheel();
 
   // ==================== PROCEDURAL EDITORIAL DISTRESSED COLLAGE ENGINE ====================
   // Generates unpredictable, subtle semi-transparent paper/ink/print overlays

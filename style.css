@@ -2376,187 +2376,216 @@ body {
   }
 
   /* Authentic Metaphor Background Framing on Mobile
-     Shift focal point to the right (78%) where the protagonist / character art lives */
+     Shift focal point to the right (80% 45%) where the protagonist / character art lives */
   .bg-media {
-    object-position: 78% center !important;
+    object-position: 80% 45% !important;
   }
 
   .bg-overlay {
     background: linear-gradient(
       90deg,
-      rgba(5, 5, 5, 0.78) 0%,
-      rgba(5, 5, 5, 0.52) 48%,
-      rgba(5, 5, 5, 0.12) 78%,
+      rgba(5, 5, 5, 0.90) 0%,
+      rgba(5, 5, 5, 0.65) 45%,
+      rgba(5, 5, 5, 0.12) 75%,
       rgba(5, 5, 5, 0.35) 100%
     ) !important;
   }
 
   .chalk-ruler-overlay {
-    left: 60vw;
-    opacity: 0.45;
+    left: 65vw;
+    opacity: 0.4;
     transform: rotate(-22deg);
   }
 
-  /* Main Menu Screen Layout - Dynamic Metaphor Stagger */
+  /* Main Menu Screen Layout - Kinetic Focus Wheel */
   .menu-screen {
-    align-items: flex-start;
+    align-items: stretch;
+    justify-content: flex-start;
   }
 
   .main-menu-layout {
-    padding: 0 12px;
-    justify-content: flex-start;
+    padding: 0;
+    width: 100%;
+    height: 100dvh;
+    position: relative;
+    overflow: hidden;
   }
 
   .main-menu {
     width: 100%;
+    height: 100%;
+    position: relative;
   }
 
+  /* Left Focus Rail (Vertical Pointer Indicator Line) */
+  .main-menu::before {
+    content: '';
+    position: absolute;
+    top: 18vh;
+    bottom: 18vh;
+    left: clamp(10px, 3vw, 16px);
+    width: 2px;
+    background: repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.6) 0px,
+      rgba(255, 255, 255, 0.6) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+    pointer-events: none;
+    z-index: 6;
+  }
+
+  /* Center Reticle / Indicator Arrow for Active Focus */
+  .main-menu::after {
+    content: '▶';
+    position: absolute;
+    top: 50%;
+    left: clamp(5px, 2vw, 10px);
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    color: #d32f2f;
+    text-shadow: 0 0 8px #d32f2f, 1px 1px 0 #000;
+    pointer-events: none;
+    z-index: 7;
+    animation: reticlePulse 1.2s infinite alternate ease-in-out;
+  }
+
+  @keyframes reticlePulse {
+    0% { transform: translateY(-50%) translateX(0); opacity: 0.75; }
+    100% { transform: translateY(-50%) translateX(3px); opacity: 1; filter: drop-shadow(0 0 6px #d32f2f); }
+  }
+
+  /* The Kinetic Focus Wheel Container */
   .menu-stack {
     position: absolute;
-    top: clamp(10px, 1.8vh, 18px);
-    bottom: clamp(38px, 5vh, 50px);
-    left: clamp(10px, 3vw, 20px);
-    right: auto;
-    height: auto;
-    max-height: calc(100dvh - 48px);
+    inset: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    height: 100dvh;
+    width: 100%;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-top: calc(50dvh - 36px);
+    padding-bottom: calc(50dvh - 36px);
+    padding-left: clamp(24px, 7vw, 40px);
+    padding-right: 20px;
+    gap: clamp(26px, 4.5vh, 42px);
+    align-items: flex-start;
+    justify-content: flex-start;
     z-index: 5;
   }
 
-  /* Metaphor Signature Rotations, Skews, and Staggered Offsets for Mobile */
+  .menu-stack::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Base Menu Item on Mobile Focus Reel */
   .menu-item {
-    margin-bottom: 0;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
     display: block;
     width: fit-content;
-    white-space: nowrap;
-    transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: left center;
+    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 220ms ease,
+                filter 220ms ease;
+    opacity: 0.32;
+    transform: scale(0.76) rotate(-3deg) skewX(-7deg);
+    filter: blur(0.5px);
+    user-select: none;
   }
 
-  .menu-item[data-page="skill"] {
-    transform: rotate(-5deg) skewX(-10deg) translate(0px, 0) !important;
-  }
-  .menu-item[data-page="skill"] .m-word {
-    font-size: clamp(2.05rem, 5.3vh, 2.75rem) !important;
-  }
+  /* Custom Theme Color Definitions */
+  .menu-item[data-page="skill"] { --item-color: #ab47bc; }
+  .menu-item[data-page="item"] { --item-color: #2e7d32; }
+  .menu-item[data-page="equipment"] { --item-color: #d32f2f; }
+  .menu-item[data-page="party"] { --item-color: #b71c1c; }
+  .menu-item[data-page="follower"] { --item-color: #ef6c00; }
+  .menu-item[data-page="quest"] { --item-color: #fbc02d; }
+  .menu-item[data-page="calendar"] { --item-color: #7cb342; }
+  .menu-item[data-page="journal"] { --item-color: #00838f; }
+  .menu-item[data-page="system"] { --item-color: #0288d1; }
 
-  .menu-item[data-page="item"] {
-    transform: rotate(-3deg) skewX(-8deg) translate(18px, 0) !important;
-  }
-  .menu-item[data-page="item"] .m-word {
-    font-size: clamp(2.15rem, 5.6vh, 2.85rem) !important;
-  }
-
-  .menu-item[data-page="equipment"] {
-    transform: rotate(-6deg) skewX(-11deg) translate(-4px, 0) !important;
-  }
-  .menu-item[data-page="equipment"] .m-word {
-    font-size: clamp(2.25rem, 5.8vh, 3.05rem) !important;
-  }
-
-  .menu-item[data-page="party"] {
-    transform: rotate(-4deg) skewX(-8deg) translate(16px, 0) !important;
-  }
-  .menu-item[data-page="party"] .m-word {
-    font-size: clamp(2.1rem, 5.4vh, 2.8rem) !important;
-  }
-
-  .menu-item[data-page="follower"] {
-    transform: rotate(-5deg) skewX(-10deg) translate(-2px, 0) !important;
-  }
-  .menu-item[data-page="follower"] .m-word {
-    font-size: clamp(2.25rem, 5.8vh, 3.05rem) !important;
-  }
-
-  .menu-item[data-page="quest"] {
-    transform: rotate(-3deg) skewX(-8deg) translate(20px, 0) !important;
-  }
-  .menu-item[data-page="quest"] .m-word {
-    font-size: clamp(2.0rem, 5.1vh, 2.65rem) !important;
-  }
-
-  .menu-item[data-page="calendar"] {
-    transform: rotate(-5deg) skewX(-10deg) translate(6px, 0) !important;
-  }
-  .menu-item[data-page="calendar"] .m-word {
-    font-size: clamp(2.05rem, 5.3vh, 2.75rem) !important;
-  }
-
-  .menu-item[data-page="journal"] {
-    transform: rotate(-4deg) skewX(-8deg) translate(14px, 0) !important;
-  }
-  .menu-item[data-page="journal"] .m-word {
-    font-size: clamp(1.9rem, 4.9vh, 2.55rem) !important;
-  }
-
-  .menu-item[data-page="system"] {
-    transform: rotate(-3deg) skewX(-7deg) translate(22px, 0) !important;
-  }
-  .menu-item[data-page="system"] .m-word {
-    font-size: clamp(1.85rem, 4.7vh, 2.45rem) !important;
-  }
-
-  /* Dramatic Hover, Touch & Active Surge */
-  .menu-item:hover,
-  .menu-item:focus-visible,
-  .menu-item:active,
-  .menu-item.active {
+  /* IN-FOCUS ACTIVE ITEM: Raksasa, Tajam, Menyala Spektakuler! */
+  .menu-item.is-focused {
+    opacity: 1 !important;
+    transform: scale(1.16) rotate(-5deg) skewX(-11deg) translateX(14px) !important;
+    filter: none !important;
     z-index: 10;
   }
 
-  .menu-item:hover .m-word,
-  .menu-item:focus-visible .m-word,
-  .menu-item:active .m-word {
-    color: #fff;
-    transform: scale(1.06) translateX(12px);
+  .menu-item.is-focused .m-word {
+    color: #ffffff;
     text-shadow:
       3px 3px 0 #000,
       -2px -2px 0 #000,
       2px -2px 0 #000,
       -2px 2px 0 #000,
-      0 0 22px var(--item-color, #ab47bc);
+      0 0 25px var(--item-color, #ab47bc);
   }
 
-  .menu-item:hover .m-brush-splash,
-  .menu-item:focus-visible .m-brush-splash,
-  .menu-item:active .m-brush-splash {
-    opacity: 0.92;
-    transform: translateY(-50%) scaleX(1) rotate(-1deg);
+  .menu-item.is-focused .m-brush-splash {
+    opacity: 0.95 !important;
+    transform: scale(1.08) skewX(-14deg) !important;
   }
 
-  .menu-item:hover .m-ribbon,
-  .menu-item:focus-visible .m-ribbon,
-  .menu-item:active .m-ribbon {
-    opacity: 1;
-    transform: scaleX(1) skewX(-14deg);
+  .menu-item.is-focused .m-kanji {
+    opacity: 1 !important;
+    color: #ffffff !important;
+    transform: translateX(10px) !important;
+    text-shadow: 2px 2px 0 #000, 0 0 10px var(--item-color, #ab47bc);
   }
 
+  .menu-item.is-focused .m-ribbon {
+    opacity: 1 !important;
+    transform: scaleX(1) skewX(-14deg) !important;
+  }
+
+  /* Unfocused Item Overrides */
+  .menu-item:not(.is-focused) .m-brush-splash {
+    opacity: 0 !important;
+    transform: scale(0.65) skewX(-14deg) !important;
+  }
+
+  .menu-item:not(.is-focused) .m-ribbon {
+    opacity: 0 !important;
+    transform: scaleX(0) skewX(-14deg) !important;
+  }
+
+  .menu-item:not(.is-focused) .m-kanji {
+    opacity: 0.45 !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    transform: translateX(0) !important;
+    text-shadow: 1px 1px 0 #000;
+  }
+
+  /* Scaled Mobile Word & Kanji Sizes */
   .m-word {
+    font-size: clamp(2.5rem, 6.4vh, 3.5rem) !important;
     line-height: 0.82;
     letter-spacing: -0.03em;
-    text-shadow:
-      3px 3px 0 #000,
-      -1.5px -1.5px 0 #000,
-      1.5px -1.5px 0 #000,
-      -1.5px 1.5px 0 #000,
-      0 3px 12px rgba(0,0,0,0.95);
   }
 
   .m-kanji {
-    font-size: clamp(0.58rem, 1.3vh, 0.72rem);
-    top: -9px;
+    font-size: clamp(0.62rem, 1.4vh, 0.8rem);
+    top: -10px;
     left: 2px;
-    letter-spacing: 0.14em;
-    text-shadow: 2px 2px 0 #000, 0 0 6px #000;
+    letter-spacing: 0.16em;
   }
 
   .m-ribbon {
-    font-size: 0.62rem;
-    top: -11px;
+    font-size: 0.65rem;
+    top: -12px;
     left: -4px;
-    padding: 2px 8px;
-    letter-spacing: 0.08em;
+    padding: 3px 10px 3px 8px;
+    letter-spacing: 0.1em;
   }
 
   .m-num-tag {
