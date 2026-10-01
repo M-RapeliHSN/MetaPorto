@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let isTransitioning = false;
   let currentPage = null;
   let isBgmPlaying = false;
-  let isBgmUserPaused = false;
+  let isBgmUserPaused = true;
   const TARGET_BGM_VOLUME = 0.32;
   let bgmFadeInterval = null;
 
@@ -700,22 +700,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==================== SKILL PAGE PARTY CARD SWITCHER ====================
   const skillSets = {
     backend: [
-      { icon: 'â—ˆ', elemClass: 'phys', name: 'PHP 8 & Laravel 11/12', mp: '98 PTS' },
-      { icon: 'â—‡', elemClass: 'wind', name: 'RESTful API Architecture', mp: '96 PTS' },
-      { icon: 'â—Ž', elemClass: 'magic', name: 'Node.js & Express.js Backend', mp: '90 PTS' },
-      { icon: 'â—‹', elemClass: 'fire', name: 'Python Scripting & Automation', mp: '88 PTS' }
+      { icon: '◈', elemClass: 'phys', name: 'PHP 8 & Laravel 11/12', badge: 'PRIMARY STACK' },
+      { icon: '◇', elemClass: 'wind', name: 'RESTful API Architecture', badge: 'ADVANCED' },
+      { icon: '◎', elemClass: 'magic', name: 'Node.js & Express.js Backend', badge: 'PROJECT EXP' },
+      { icon: '○', elemClass: 'fire', name: 'Python Scripting & Automation', badge: 'DAILY USE' }
     ],
     frontend: [
-      { icon: 'â—ˆ', elemClass: 'phys', name: 'HTML5 / CSS3 / JavaScript', mp: '94 PTS' },
-      { icon: 'â—‹', elemClass: 'fire', name: 'TailwindCSS & Responsive UI/UX', mp: '96 PTS' },
-      { icon: 'â—‡', elemClass: 'wind', name: 'React.js & Next.js Interface', mp: '88 PTS' },
-      { icon: 'â–³', elemClass: 'ice', name: 'Vue.js & Laravel Blade Components', mp: '90 PTS' }
+      { icon: '◈', elemClass: 'phys', name: 'HTML5 / CSS3 / JavaScript ES6+', badge: 'CORE STACK' },
+      { icon: '○', elemClass: 'fire', name: 'TailwindCSS & Responsive UI/UX', badge: 'DAILY USE' },
+      { icon: '◇', elemClass: 'wind', name: 'React.js & Next.js Interface', badge: 'PROJECT EXP' },
+      { icon: '△', elemClass: 'ice', name: 'Laravel Blade Templating Components', badge: 'PRODUCTION EXP' }
     ],
     tools: [
-      { icon: 'â—ˆ', elemClass: 'tool', name: 'MySQL Relational Database', mp: '96 PTS' },
-      { icon: 'â—Ž', elemClass: 'magic', name: 'Antigravity IDE Workflow', mp: '98 PTS' },
-      { icon: 'â—‡', elemClass: 'wind', name: 'Git & GitHub Version Control', mp: '95 PTS' },
-      { icon: 'â–³', elemClass: 'phys', name: 'Postman API Testing & Debugging', mp: '94 PTS' }
+      { icon: '◈', elemClass: 'tool', name: 'MySQL Relational Database', badge: 'PRODUCTION EXP' },
+      { icon: '◎', elemClass: 'magic', name: 'Antigravity IDE & Terminal CLI', badge: 'DAILY USE' },
+      { icon: '◇', elemClass: 'wind', name: 'Git & GitHub Version Control', badge: 'DAILY USE' },
+      { icon: '△', elemClass: 'phys', name: 'Postman API Testing & Debugging', badge: 'VERIFIED' }
     ]
   };
 
@@ -732,7 +732,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="g-skill-row">
           <span class="g-elem-icon ${s.elemClass || 'phys'}">${s.icon}</span>
           <span class="g-skill-name">${s.name}</span>
-          <span class="g-skill-mp">${s.mp}</span>
+          <span class="g-skill-badge">${s.badge}</span>
         </div>
       `).join('');
     });
@@ -743,6 +743,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'grow-a-garden',
       name: 'GROW-A-GARDEN',
+      role: 'Backend Developer (Solo)',
       liveUrl: 'https://github.com/Apisikma123/Grow-a-garden.git',
       repoUrl: 'https://github.com/Apisikma123/Grow-a-garden.git',
       slides: [
@@ -766,6 +767,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'wilmarbooks',
       name: 'WILMARBOOKS (DONASI BUKU WBI)',
+      role: 'Backend & Database Developer (Team)',
       liveUrl: 'https://donasi-buku.wbi.ac.id',
       repoUrl: 'https://github.com/Apisikma123/wilmarbuku.git',
       slides: [
@@ -789,6 +791,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'kapi',
       name: 'KAPI (KERETA API BOOKING SYSTEM)',
+      role: 'Solo Fullstack Developer',
       liveUrl: 'https://github.com/M-RapeliHSN/KAPI.git',
       repoUrl: 'https://github.com/M-RapeliHSN/KAPI.git',
       slides: [
@@ -812,6 +815,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'inventaris-wbi',
       name: 'INVENTARIS WBI (SISTEM ASET KAMPUS)',
+      role: 'Backend Developer',
       liveUrl: 'https://github.com/r4hmansun/inventartis-WBI.git',
       repoUrl: 'https://github.com/r4hmansun/inventartis-WBI.git',
       slides: [
@@ -835,6 +839,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'okiro-cafe',
       name: 'ÖKIRO CAFÉ (COMPANY PROFILE & CATALOG)',
+      role: 'Solo Frontend & UI/UX Developer',
       liveUrl: 'https://okiro-cafe.vercel.app',
       repoUrl: 'https://github.com/M-RapeliHSN/Okiro-Cafe.git',
       slides: [
@@ -858,6 +863,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'horus-barbershop',
       name: 'HORUS BARBERSHOP (GENTLEMEN\'S GROOMING)',
+      role: 'Solo Web Developer',
       liveUrl: 'https://horus-barbershop.vercel.app',
       repoUrl: 'https://github.com/M-RapeliHSN/horus-barbershop.git',
       slides: [
@@ -881,6 +887,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'toriel-store',
       name: 'TORIEL STORE (KATALOG RETAIL UMKM)',
+      role: 'Solo Web Developer',
       liveUrl: 'https://toriel-store.vercel.app',
       repoUrl: 'https://github.com/M-RapeliHSN/Toriel-Store.git',
       slides: [
@@ -932,6 +939,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (previewProjectName) previewProjectName.textContent = project.name;
+    const previewPrefix = document.querySelector('.preview-tag-prefix');
+    if (previewPrefix) previewPrefix.textContent = project.role.toUpperCase();
     if (previewSlideCurrent) previewSlideCurrent.textContent = `0${activeSlideIndex + 1}`;
     if (previewImage) {
       previewImage.src = slide.src;
@@ -1104,10 +1113,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const calMilestonesData = [
     {
+      year: '2026',
+      tag: 'PROFESSIONAL INTERNSHIP',
+      title: 'BACKEND DEVELOPER INTERN',
+      inst: 'Politeknik Wilmar Bisnis Indonesia • Periode 22 Juli 2026 — 22 Oktober 2026',
+      desc: 'Praktik Kerja Lapangan (PKL) resmi di Politeknik Wilmar Bisnis Indonesia (WBI). Bertanggung jawab penuh dalam perancangan skema dan normalisasi basis data relasional MySQL, perancangan logika bisnis backend dengan framework Laravel & PHP, serta implementasi sistem manajemen aset kampus (Inventaris WBI) dan portal donasi perpustakaan digital (WilmarBooks).',
+      comp: ['Backend Engineering', 'Laravel 11/12 & PHP 8', 'MySQL Relational Schema', 'REST API Architecture', 'Role & Auth Security']
+    },
+    {
       year: '2024',
       tag: 'FORMAL EDUCATION',
       title: 'REKAYASA PERANGKAT LUNAK (RPL)',
-      inst: 'SMK Telkom 1 Medan â€¢ Periode 2024 â€” Sekarang',
+      inst: 'SMK Telkom 1 Medan • Periode 2024 — Sekarang',
       desc: 'Menempuh pendidikan vokasi kejuruan Rekayasa Perangkat Lunak (RPL) di SMK Telkom 1 Medan dengan fokus pembelajaran mendalam pada Logika Algoritma, Pemrograman Backend, Basis Data MySQL, Pemrograman Berorientasi Objek (OOP), dan Pengembangan Web Modern.',
       comp: ['Rekayasa Perangkat Lunak', 'PHP & Laravel', 'MySQL Database', 'REST API', 'Git & GitHub']
     }

@@ -1283,16 +1283,100 @@ body {
   letter-spacing: -0.01em;
 }
 
-.g-skill-mp {
-  font-family: var(--font-menu);
-  font-size: 1.2rem;
+.g-skill-mp,
+.g-skill-badge {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
   font-weight: 900;
-  font-style: italic;
-  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.14em;
+  color: #00e676;
+  text-shadow: 0 0 10px rgba(0, 230, 118, 0.4);
+  background: rgba(0, 0, 0, 0.75);
+  padding: 4px 10px;
+  border: 1px solid rgba(0, 230, 118, 0.5);
+  border-left: 3px solid #00e676;
+  text-transform: uppercase;
+}
+
+/* Non-Tech Human-Readable Manifesto */
+.section-intro-manifesto {
+  margin-top: 0.8rem;
+  background: rgba(8, 10, 14, 0.7);
+  border-left: 3px solid rgba(255, 255, 255, 0.7);
+  padding: 8px 14px;
+  max-width: 900px;
+}
+
+.section-intro-manifesto p {
+  font-family: var(--font-body);
+  font-size: clamp(0.74rem, 0.95vw, 0.86rem);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.section-intro-manifesto strong {
+  color: #00e676;
+  letter-spacing: 0.1em;
+  font-weight: 900;
+}
+
+/* Item Role Bar in Projects */
+.m-item-role-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0 8px;
+  padding: 3px 8px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 230, 118, 0.5);
+  border-left: 3px solid #00e676;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: #ffffff;
   letter-spacing: 0.05em;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 2px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: fit-content;
+}
+
+.m-role-label {
+  color: #00e676;
+  font-weight: 900;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+}
+
+.m-item-role-bar strong {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+/* Quest Bullet Points */
+.q-bullet-points {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.q-bp-item {
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(0, 0, 0, 0.45);
+  padding: 6px 10px;
+  border-left: 2px solid #ef6c00;
+}
+
+.q-bp-item strong {
+  color: #ffb74d;
+}
+
+/* Contact Primary Badges */
+.f-status-tag.primary {
+  background: #d32f2f;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(211, 47, 47, 0.6);
 }
 
 /* =============================================================
