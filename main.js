@@ -738,7 +738,255 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ==================== ITEM PAGE INVENTORY SWITCHER ====================
+  // ==================== ITEM PAGE INVENTORY SWITCHER & METAPHOR PREVIEW DECK ====================
+  const projectArtifacts = [
+    {
+      id: 'grow-a-garden',
+      name: 'GROW-A-GARDEN',
+      liveUrl: 'https://github.com/Apisikma123/Grow-a-garden.git',
+      repoUrl: 'https://github.com/Apisikma123/Grow-a-garden.git',
+      slides: [
+        {
+          src: 'assets/projects/grow-a-garden/1.png',
+          category: 'HERO LANDING PAGE',
+          caption: 'Halaman beranda utama dengan branding asisten berkebun cerdas berbasis web.'
+        },
+        {
+          src: 'assets/projects/grow-a-garden/2.png',
+          category: 'GARDEN DASHBOARD & LOG',
+          caption: 'Dashboard pemantauan siklus hidup tanaman dari penyemaian hingga masa panen.'
+        },
+        {
+          src: 'assets/projects/grow-a-garden/3.png',
+          category: 'SMART SCHEDULE & WEATHER',
+          caption: 'Jadwal pengingat penyiraman otomatis terintegrasi prakiraan cuaca harian real-time.'
+        }
+      ]
+    },
+    {
+      id: 'wilmarbooks',
+      name: 'WILMARBOOKS (DONASI BUKU WBI)',
+      liveUrl: 'https://donasi-buku.wbi.ac.id',
+      repoUrl: 'https://github.com/Apisikma123/wilmarbuku.git',
+      slides: [
+        {
+          src: 'assets/projects/wilmarbooks/1.png',
+          category: 'HERO LANDING PAGE',
+          caption: 'Portal donasi buku digital perpustakaan Politeknik Wilmar Bisnis Indonesia.'
+        },
+        {
+          src: 'assets/projects/wilmarbooks/2.png',
+          category: 'KATALOG BUKU & INVENTORY',
+          caption: 'Katalog interaktif buku donasi dengan filter pencarian dan tampilan kartu e-commerce.'
+        },
+        {
+          src: 'assets/projects/wilmarbooks/3.png',
+          category: 'FORM DONASI & TRACKING',
+          caption: 'Alur administrasi penyerahan donasi buku terpusat dan pencatatan riwayat donatur.'
+        }
+      ]
+    },
+    {
+      id: 'kapi',
+      name: 'KAPI (KERETA API BOOKING SYSTEM)',
+      liveUrl: 'https://github.com/M-RapeliHSN/KAPI.git',
+      repoUrl: 'https://github.com/M-RapeliHSN/KAPI.git',
+      slides: [
+        {
+          src: 'assets/projects/kapi/1.png',
+          category: 'HERO RESERVATION PORTAL',
+          caption: 'Antarmuka utama pencarian rute, tanggal perjalanan, dan stasiun keberangkatan.'
+        },
+        {
+          src: 'assets/projects/kapi/2.png',
+          category: 'DAFTAR KERETA & KELAS',
+          caption: 'Katalog pilihan jadwal kereta, rincian harga tiket, dan ketersediaan kuota gerbong.'
+        },
+        {
+          src: 'assets/projects/kapi/3.png',
+          category: '3D SEAT MAP & E-TICKET QR',
+          caption: 'Interactive seat map pemilihan kursi anti-overbooking dan e-ticket boarding pass digital.'
+        }
+      ]
+    },
+    {
+      id: 'inventaris-wbi',
+      name: 'INVENTARIS WBI (SISTEM ASET KAMPUS)',
+      liveUrl: 'https://github.com/r4hmansun/inventartis-WBI.git',
+      repoUrl: 'https://github.com/r4hmansun/inventartis-WBI.git',
+      slides: [
+        {
+          src: 'assets/projects/inventaris-wbi/1.png',
+          category: 'PORTAL AUTH & LOGIN',
+          caption: 'Gerbang autentikasi aman dengan pemisahan hak akses Admin dan Super Admin.'
+        },
+        {
+          src: 'assets/projects/inventaris-wbi/2.png',
+          category: 'DASHBOARD MANAJEMEN ASET',
+          caption: 'Pusat rekapitulasi data inventaris, nilai total aset, dan tahun anggaran pengadaan.'
+        },
+        {
+          src: 'assets/projects/inventaris-wbi/3.png',
+          category: 'MUTASI BARANG & AUDIT LOG',
+          caption: 'Tracking sirkulasi mutasi aset kampus, status kondisi, dan verifikasi barang.'
+        }
+      ]
+    },
+    {
+      id: 'okiro-cafe',
+      name: 'ÖKIRO CAFÉ (COMPANY PROFILE & CATALOG)',
+      liveUrl: 'https://okiro-cafe.vercel.app',
+      repoUrl: 'https://github.com/M-RapeliHSN/Okiro-Cafe.git',
+      slides: [
+        {
+          src: 'assets/projects/okiro-cafe/1.png',
+          category: 'HERO ARTISAN COFFEE SHOP',
+          caption: 'Landing page kedai kopi artisan bernuansa Japanese-Minimalist yang elegan.'
+        },
+        {
+          src: 'assets/projects/okiro-cafe/2.png',
+          category: 'KATALOG MENU & FILTER',
+          caption: 'Daftar racikan kopi dan pastry dengan filter kategori instan serta pencarian cepat.'
+        },
+        {
+          src: 'assets/projects/okiro-cafe/3.png',
+          category: 'DRAWER ORDER WHATSAPP',
+          caption: 'Sistem keranjang pesanan langsung terintegrasi template chat checkout WhatsApp.'
+        }
+      ]
+    },
+    {
+      id: 'horus-barbershop',
+      name: 'HORUS BARBERSHOP (GENTLEMEN\'S GROOMING)',
+      liveUrl: 'https://horus-barbershop.vercel.app',
+      repoUrl: 'https://github.com/M-RapeliHSN/horus-barbershop.git',
+      slides: [
+        {
+          src: 'assets/projects/horus-barbershop/1.png',
+          category: 'HERO ROYAL GENTLEMEN',
+          caption: 'Halaman utama premium bertema ritual cukur klasik dan perawatan bangsawan.'
+        },
+        {
+          src: 'assets/projects/horus-barbershop/2.png',
+          category: 'SERVICES & MASTER BARBERS',
+          caption: 'Katalog paket pangkas rambut, hot towel shave, dan profil master barber profesional.'
+        },
+        {
+          src: 'assets/projects/horus-barbershop/3.png',
+          category: 'MULTI-BRANCH WA BOOKING',
+          caption: 'Sistem reservasi jadwal pangkas multi-cabang Jakarta, Surabaya, dan Medan.'
+        }
+      ]
+    },
+    {
+      id: 'toriel-store',
+      name: 'TORIEL STORE (KATALOG RETAIL UMKM)',
+      liveUrl: 'https://toriel-store.vercel.app',
+      repoUrl: 'https://github.com/M-RapeliHSN/Toriel-Store.git',
+      slides: [
+        {
+          src: 'assets/projects/toriel-store/1.png',
+          category: 'HERO PROMO LOKAL UMKM',
+          caption: 'Etalase belanja retail modern produk pakaian, aksesoris, dan kriya lokal UMKM.'
+        },
+        {
+          src: 'assets/projects/toriel-store/2.png',
+          category: 'KATALOG GRID & SEARCH',
+          caption: 'Grid produk interaktif dengan filter kategori, pencarian cepat, dan badge diskon.'
+        },
+        {
+          src: 'assets/projects/toriel-store/3.png',
+          category: 'CART & CHECKOUT WHATSAPP',
+          caption: 'Keranjang belanja belanja online terhubung langsung ke WhatsApp pesanan penjual.'
+        }
+      ]
+    }
+  ];
+
+  let activeProjectIndex = 0;
+  let activeSlideIndex = 0;
+
+  const previewProjectName = document.getElementById('previewProjectName');
+  const previewSlideCurrent = document.getElementById('previewSlideCurrent');
+  const previewImage = document.getElementById('previewImage');
+  const previewGlitchOverlay = document.getElementById('previewGlitchOverlay');
+  const previewCategoryText = document.getElementById('previewCategoryText');
+  const previewCaptionText = document.getElementById('previewCaptionText');
+  const previewOverlayLink = document.getElementById('previewOverlayLink');
+  const previewLiveLink = document.getElementById('previewLiveLink');
+  const previewRepoLink = document.getElementById('previewRepoLink');
+  const previewPrevBtn = document.getElementById('previewPrevBtn');
+  const previewNextBtn = document.getElementById('previewNextBtn');
+  const indicatorBars = document.querySelectorAll('.indicator-bar');
+
+  function updatePreviewDeck(resetSlide = false) {
+    if (resetSlide) activeSlideIndex = 0;
+    const project = projectArtifacts[activeProjectIndex] || projectArtifacts[0];
+    const slide = project.slides[activeSlideIndex] || project.slides[0];
+
+    // Trigger glitch / slash flash animation
+    if (previewGlitchOverlay) {
+      previewGlitchOverlay.classList.remove('flash');
+      void previewGlitchOverlay.offsetWidth;
+      previewGlitchOverlay.classList.add('flash');
+    }
+
+    if (previewProjectName) previewProjectName.textContent = project.name;
+    if (previewSlideCurrent) previewSlideCurrent.textContent = `0${activeSlideIndex + 1}`;
+    if (previewImage) {
+      previewImage.src = slide.src;
+      previewImage.alt = `${project.name} - ${slide.category}`;
+    }
+    if (previewCategoryText) previewCategoryText.textContent = slide.category;
+    if (previewCaptionText) previewCaptionText.textContent = slide.caption;
+
+    const targetUrl = project.liveUrl || project.repoUrl;
+    if (previewOverlayLink) previewOverlayLink.href = targetUrl;
+    if (previewLiveLink) {
+      previewLiveLink.href = targetUrl;
+      previewLiveLink.style.display = project.liveUrl ? 'inline-flex' : 'none';
+    }
+    if (previewRepoLink) {
+      previewRepoLink.href = project.repoUrl || targetUrl;
+    }
+
+    // Update indicator bars
+    indicatorBars.forEach((bar, idx) => {
+      bar.classList.toggle('active', idx === activeSlideIndex);
+    });
+  }
+
+  function nextSlide() {
+    playClickSFX();
+    const project = projectArtifacts[activeProjectIndex] || projectArtifacts[0];
+    activeSlideIndex = (activeSlideIndex + 1) % project.slides.length;
+    updatePreviewDeck(false);
+  }
+
+  function prevSlide() {
+    playClickSFX();
+    const project = projectArtifacts[activeProjectIndex] || projectArtifacts[0];
+    activeSlideIndex = (activeSlideIndex - 1 + project.slides.length) % project.slides.length;
+    updatePreviewDeck(false);
+  }
+
+  window.__previewNextSlide = nextSlide;
+  window.__previewPrevSlide = prevSlide;
+
+  if (previewNextBtn) previewNextBtn.addEventListener('click', nextSlide);
+  if (previewPrevBtn) previewPrevBtn.addEventListener('click', prevSlide);
+
+  indicatorBars.forEach(bar => {
+    bar.addEventListener('click', () => {
+      const targetSlide = parseInt(bar.dataset.slide, 10) || 0;
+      if (targetSlide !== activeSlideIndex) {
+        playClickSFX();
+        activeSlideIndex = targetSlide;
+        updatePreviewDeck(false);
+      }
+    });
+  });
+
   const itemRows = document.querySelectorAll('.m-item-row');
   itemRows.forEach(row => {
     row.addEventListener('mouseenter', () => {
@@ -748,6 +996,12 @@ document.addEventListener('DOMContentLoaded', () => {
       playClickSFX();
       itemRows.forEach(r => r.classList.remove('active'));
       row.classList.add('active');
+
+      const index = parseInt(row.dataset.item, 10);
+      if (!isNaN(index) && index !== activeProjectIndex) {
+        activeProjectIndex = index;
+        updatePreviewDeck(true); // reset to slide 1 on new project
+      }
     });
   });
 
@@ -1009,6 +1263,20 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         navigateHome();
         return;
+      }
+
+      // Keyboard navigation for Item Inspection Deck (ArrowLeft / ArrowRight / a / d)
+      if (currentPage === 'item') {
+        if (e.key === 'ArrowLeft' || e.key === 'a') {
+          e.preventDefault();
+          if (typeof window.__previewPrevSlide === 'function') window.__previewPrevSlide();
+          return;
+        }
+        if (e.key === 'ArrowRight' || e.key === 'd') {
+          e.preventDefault();
+          if (typeof window.__previewNextSlide === 'function') window.__previewNextSlide();
+          return;
+        }
       }
 
       // Keyboard navigation inside sub-menus (ArrowUp / ArrowDown)
