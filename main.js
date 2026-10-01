@@ -743,7 +743,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'grow-a-garden',
       name: 'GROW-A-GARDEN',
-      role: 'Backend Developer (Solo)',
+      role: 'Backend Engineer',
       liveUrl: 'https://github.com/Apisikma123/Grow-a-garden.git',
       repoUrl: 'https://github.com/Apisikma123/Grow-a-garden.git',
       slides: [
