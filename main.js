@@ -42,10 +42,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // calendar: '...'
   };
 
-  // Preload background images agar transisi instan tanpa jeda
-  Object.values(pageBackgrounds).forEach(src => {
+  // Smart On-Demand Background Preloader (Conserves RAM & Prevents Tab Lag)
+  const preloadedBgs = new Set();
+  function preloadBg(src) {
+    if (!src || preloadedBgs.has(src)) return;
+    preloadedBgs.add(src);
     const img = new Image();
     img.src = src;
+  }
+  preloadBg(pageBackgrounds.home);
+
+  // Preload menu background lazily when user hovers or navigates to an item
+  menuItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const pageId = item.dataset.page;
+      if (pageId && pageBackgrounds[pageId]) {
+        preloadBg(pageBackgrounds[pageId]);
+      }
+    }, { passive: true });
+    item.addEventListener('focus', () => {
+      const pageId = item.dataset.page;
+      if (pageId && pageBackgrounds[pageId]) {
+        preloadBg(pageBackgrounds[pageId]);
+      }
+    }, { passive: true });
   });
 
   // Sub-Menu Interactive Elements
@@ -1167,7 +1187,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isMobile = window.innerWidth <= 768;
     const particles = [];
-    const particleCount = isMobile ? 18 : 45;
+    const particleCount = isMobile ? 12 : 22;
     const colors = [
       'rgba(211, 47, 47, 0.45)',
       'rgba(251, 192, 45, 0.35)',
@@ -1180,19 +1200,25 @@ document.addEventListener('DOMContentLoaded', () => {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 2.5 + 1.0,
+        radius: Math.random() * 2.2 + 0.8,
         color: colors[Math.floor(Math.random() * colors.length)],
         vx: (Math.random() - 0.5) * 0.4 - 0.2,
-        vy: -Math.random() * 0.6 - 0.2,
+        vy: -Math.random() * 0.5 - 0.15,
         angle: Math.random() * Math.PI * 2,
         angularSpeed: (Math.random() - 0.5) * 0.02
       });
     }
 
+    let inkAnimId = null;
     function renderInkParticles() {
+      if (document.hidden) {
+        inkAnimId = null;
+        return;
+      }
       ctx.clearRect(0, 0, width, height);
 
-      particles.forEach(p => {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         p.x += p.vx + Math.sin(p.angle) * 0.3;
         p.y += p.vy;
         p.angle += p.angularSpeed;
@@ -1207,15 +1233,18 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        if (!isMobile) {
-          ctx.shadowBlur = 8;
-          ctx.shadowColor = p.color;
-        }
         ctx.fill();
-      });
+      }
 
-      requestAnimationFrame(renderInkParticles);
+      inkAnimId = requestAnimationFrame(renderInkParticles);
     }
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && !inkAnimId) {
+        renderInkParticles();
+      }
+    });
+
     renderInkParticles();
   }
 
@@ -1476,8 +1505,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     function spawnCollageShape() {
-      // Keep max 4 shapes on screen simultaneously
-      if (collageLayer.childElementCount >= 4) return;
+      // Don't spawn if user is inside a sub-menu or tab is hidden
+      if (currentPage !== null || document.hidden) return;
+      // Keep max 2 shapes on screen simultaneously for smooth performance
+      if (collageLayer.childElementCount >= 2) return;
 
       const el = document.createElement('div');
       const shapeType = shapeClasses[Math.floor(Math.random() * shapeClasses.length)];
@@ -1521,15 +1552,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 400);
     }
 
-    // Irregular flashing loop
+    // Elegant, cinematic flashing loop (gentle on CPU & memory)
     function scheduleNextCollage() {
-      const nextDelay = Math.floor(Math.random() * 350 + 180); // 180ms - 530ms
+      const nextDelay = Math.floor(Math.random() * 1200 + 1200); // 1.2s - 2.4s
       setTimeout(() => {
         spawnCollageShape();
-        if (Math.random() > 0.45) {
-          // Occasionally spawn a rapid pair of shapes
-          setTimeout(spawnCollageShape, 70);
-        }
         scheduleNextCollage();
       }, nextDelay);
     }
