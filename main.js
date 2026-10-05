@@ -759,24 +759,24 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'grow-a-garden',
       name: 'GROW-A-GARDEN',
-      role: 'Backend Engineer',
+      role: 'Backend Developer (Team Project)',
       liveUrl: null,
       repoUrl: 'https://github.com/Apisikma123/Grow-a-garden.git',
       slides: [
         {
           src: 'assets/projects/grow-a-garden/1.png',
-          category: 'HERO LANDING PAGE',
-          caption: 'Halaman beranda asisten berkebun cerdas berbasis web (Clean MVC Architecture).'
+          category: 'PLANT LIFECYCLE & MULTI-GARDEN',
+          caption: 'Manajemen siklus hidup tanaman multi-kebun (seedling, growth, harvest) berbasis Eloquent relational models.'
         },
         {
           src: 'assets/projects/grow-a-garden/2.png',
-          category: 'GARDEN DASHBOARD & LOG',
-          caption: 'Dashboard pemantauan siklus hidup tanaman dari penyemaian hingga masa panen.'
+          category: 'WEATHER AUTOPILOT SERVICE',
+          caption: 'Arsitektur service layer (AutopilotService & WeatherService) untuk otomasi perawatan tanaman adaptif cuaca riil.'
         },
         {
           src: 'assets/projects/grow-a-garden/3.png',
-          category: 'SMART SCHEDULE & WEATHER',
-          caption: 'Jadwal pengingat penyiraman otomatis terintegrasi prakiraan cuaca harian real-time.'
+          category: 'SCHEDULED TASKS & WEBSOCKETS',
+          caption: 'Console commands terjadwal untuk pembaruan status berkala dan event broadcasting real-time via Laravel Reverb.'
         }
       ]
     },

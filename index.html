@@ -404,16 +404,16 @@
           <div class="m-item-row active" data-item="0">
             <div class="m-item-brush-bg"></div>
             <div class="m-item-main">
-              <span class="m-item-tag repo">REPO</span>
+              <span class="m-item-tag repo">TEAM / REPO</span>
               <span class="m-item-icon">◈</span>
               <span class="m-item-name">Grow-a-Garden</span>
               <span class="m-item-qty">x01</span>
             </div>
             <div class="m-item-embedded-desc">
-              <div class="m-item-role-bar"><span class="role-lbl">PERAN:</span> Backend Engineer</div>
-              <p class="m-desc-text">Asisten berkebun cerdas berbasis web yang mencatat siklus hidup tanaman dari penyemaian hingga panen. Dibangun dengan arsitektur MVC terstruktur, relasi database penjadwalan cerdas, dan integrasi cuaca harian real-time.</p>
-              <div class="m-desc-tags"><span>Laravel</span><span>Clean MVC</span><span>MySQL</span><span>Weather API</span></div>
-              <a href="https://github.com/Apisikma123/Grow-a-garden.git" target="_blank" rel="noopener" class="m-desc-link">GITHUB REPOSITORY →</a>
+              <div class="m-item-role-bar"><span class="role-lbl">PERAN:</span> Backend Developer (Team Project)</div>
+              <p class="m-desc-text">Platform manajemen kebun cerdas multi-domain. Merancang logika siklus hidup tanaman (semai hingga panen), arsitektur modular service-layer (<code>AutopilotService</code> &amp; <code>WeatherService</code>), mesin otomasi perawatan harian adaptif cuaca, dan sinkronisasi real-time via Laravel Reverb.</p>
+              <div class="m-desc-tags"><span>PHP 8.3</span><span>Laravel 13</span><span>MySQL</span><span>Weather Autopilot</span><span>Scheduled Commands</span><span>Reverb WebSockets</span><span>Service Layer</span></div>
+              <a href="https://github.com/Apisikma123/Grow-a-garden.git" target="_blank" rel="noopener" class="m-desc-link">GITHUB REPOSITORY &amp; ARCHITECTURE →</a>
             </div>
           </div>
 
@@ -1009,9 +1009,20 @@
           Catatan keputusan arsitektur, trade-off rekayasa sistem backend, dan dev logs dari implementasi nyata di lingkungan produksi institusional dan sistem reservasi konkuren.
         </p>
 
-        <!-- Log 01: KAPI Concurrency & Seat Locking -->
+        <!-- Log 01: Grow-a-Garden Weather Autopilot & Scheduled Care Engine -->
         <article class="j-entry">
-          <div class="j-entry-header">DEV LOG #01: KAPI — CONCURRENCY &amp; TRANSACTIONAL SEAT LOCKING</div>
+          <div class="j-entry-header">DEV LOG #01: GROW-A-GARDEN — WEATHER AUTOPILOT &amp; SCHEDULED CARE ENGINE</div>
+          <p class="j-entry-body">
+            <strong>Problem:</strong> Jadwal perawatan tanaman rawan terabaikan atau terjadi <em>overwatering</em> saat hujan deras jika hanya mengandalkan input manual pengguna.<br>
+            <strong>Constraint:</strong> Mengintegrasikan data API cuaca eksternal ke dalam aturan bisnis lokal tanpa memicu pemanggilan API berulang (<em>rate-limit / cost overhead</em>) pada setiap request pengguna.<br>
+            <strong>Solusi &amp; Keputusan:</strong> Membangun arsitektur modular pada service layer (<code>AutopilotService</code> &amp; <code>WeatherService</code>), di mana scheduled console commands mengeksekusi sinkronisasi cuaca secara terisolasi, mengevaluasi <em>threshold rule-engine</em> kelembaban/hujan, dan mengotomatisasi pembaruan task perawatan tanaman dengan event broadcasting real-time via Laravel Reverb.<br>
+            <strong>Hasil &amp; Bukti:</strong> Terbukti mengotomatisasi siklus perawatan tanaman multi-kebun secara adaptif berbasis kondisi cuaca riil di repositori publik GitHub.
+          </p>
+        </article>
+
+        <!-- Log 02: KAPI Concurrency & Seat Locking -->
+        <article class="j-entry">
+          <div class="j-entry-header">DEV LOG #02: KAPI — CONCURRENCY &amp; TRANSACTIONAL SEAT LOCKING</div>
           <p class="j-entry-body">
             <strong>Problem:</strong> Risiko <em>race conditions</em> dan <em>double booking</em> saat multiple user memilih kursi gerbong kereta yang sama pada milidetik yang identik.<br>
             <strong>Constraint:</strong> Sistem harus menjamin ketersediaan kursi tanpa mengunci seluruh tabel jadwal rute (<em>table-level lock</em>) yang akan mematikan throughput pemesanan pengguna lain.<br>
@@ -1020,9 +1031,9 @@
           </p>
         </article>
 
-        <!-- Log 02: WilmarBooks Real-Time Notification & Storage -->
+        <!-- Log 03: WilmarBooks Real-Time Notification & Storage -->
         <article class="j-entry">
-          <div class="j-entry-header">DEV LOG #02: WILMARBOOKS — REAL-TIME STATE &amp; CAMPUS WORKFLOW</div>
+          <div class="j-entry-header">DEV LOG #03: WILMARBOOKS — REAL-TIME STATE &amp; CAMPUS WORKFLOW</div>
           <p class="j-entry-body">
             <strong>Problem:</strong> Admin perpustakaan kampus membutuhkan notifikasi instan saat donatur mengajukan buku tanpa membebani server dengan polling HTTP berkala.<br>
             <strong>Constraint:</strong> Server kampus memiliki keterbatasan resource dan harus efisien tanpa lonjakan request berulang atau memory leak.<br>
@@ -1031,9 +1042,9 @@
           </p>
         </article>
 
-        <!-- Log 03: Inventaris WBI Relational Integrity & Role Engine -->
+        <!-- Log 04: Inventaris WBI Relational Integrity & Role Engine -->
         <article class="j-entry">
-          <div class="j-entry-header">DEV LOG #03: INVENTARIS WBI — NORMALIZATION &amp; AUDIT TRAIL</div>
+          <div class="j-entry-header">DEV LOG #04: INVENTARIS WBI — NORMALIZATION &amp; AUDIT TRAIL</div>
           <p class="j-entry-body">
             <strong>Problem:</strong> Pencatatan aset kampus antar divisi rawan redudansi data, riwayat mutasi tidak terdokumentasi, dan akses tanpa otorisasi bertingkat.<br>
             <strong>Constraint:</strong> Setiap mutasi perpindahan aset harus tercatat permanen dalam audit trail tanpa merusak integritas referensial data relasional.<br>
