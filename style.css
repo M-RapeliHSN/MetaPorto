@@ -1831,7 +1831,7 @@ body {
   gap: 14px;
 }
 
-.m-item-tag.new {
+.m-item-tag {
   font-family: var(--font-body);
   font-size: 0.6rem;
   font-weight: 900;
@@ -1839,6 +1839,20 @@ body {
   background: #d32f2f;
   padding: 2px 8px;
   clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.m-item-tag.new, .m-item-tag.prod {
+  background: #d32f2f;
+}
+
+.m-item-tag.repo {
+  background: #0288d1;
+}
+
+.m-item-tag.demo {
+  background: #00897b;
 }
 
 .m-item-icon {

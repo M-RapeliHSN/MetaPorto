@@ -21,7 +21,7 @@ Seluruh sistem dibangun dari nol menggunakan **Vanilla Web Technologies (HTML5, 
 - **Protagonist Quick Dossier**: Widget HUD di layar utama yang langsung mengidentifikasi profil pengembang, spesialisasi stack, dan ketersediaan project dalam 2 detik pertama.
 - **Programmatic SVG Brush & Slice FX**: Efek sapuan kuas kaligrafi Jepang dinamis yang diinjeksi via SVG manipulasi procedural, bukan sekadar file gambar statis.
 
-### 2. Zero-Latency Synthesized Web Audio SFX
+### 2. Low-Latency Synthesized Web Audio SFX
 - Semua efek suara antarmuka (hover clicks, enter snaps, error bumps, menu toggles) disintesis secara real-time menggunakan **Web Audio API** (`OscillatorNode`, `BiquadFilterNode`, dan custom procedural noise bursts) tanpa bergantung pada file `.mp3` eksternal.
 - Sistem **BGM Controller** terisolasi penuh dengan status default *OFF/PAUSED* untuk kenyamanan browsing multi-tab recruiter.
 
@@ -51,9 +51,9 @@ Portofolio ini menampilkan rekayasa sistem backend terverifikasi, bukan sekadar 
 | **[KAPI](https://github.com/M-RapeliHSN/KAPI)** | Solo Fullstack Developer | Laravel 12, MySQL, Pest PHP, TailwindCSS | Platform reservasi tiket kereta api dengan **Transactional Seat Locking Engine** anti-overbooking. Teruji komprehensif oleh **37 automated tests / 98 assertions** (Pest PHP). |
 | **[Inventaris WBI](https://github.com/r4hmansun/inventartis-WBI)** | Backend Developer (PKL) | PHP 8, Laravel, MySQL | Sistem inventaris aset kampus dengan Role-Based Access Control (Admin & Super Admin), siklus mutasi barang, dan audit tahun anggaran. |
 | **[Grow-a-Garden](https://github.com/Apisikma123/Grow-a-garden)** | Backend Engineer | Laravel, MySQL, Weather API | Asisten siklus hidup tanaman dari semai hingga panen dengan penjadwalan cerdas dan sinkronisasi API cuaca real-time. |
-| **[Ökiro Café](https://okiro-cafe.vercel.app)** | Solo Frontend & UI/UX | HTML5, CSS3, JS, Vercel | Website company profile & katalog menu kedai kopi artisan bertema Japanese-Minimalist terhubung order WhatsApp. |
-| **[Horus Barbershop](https://horus-barbershop.vercel.app)** | Solo Web Developer | TailwindCSS, JavaScript, Vercel | Website barbershop premium royal grooming dengan lookbook artisan dan sistem booking multi-cabang. |
-| **[Toriel Store](https://toriel-store.vercel.app)** | Solo Web Developer | TailwindCSS, JavaScript, Vercel | Katalog belanja online retail UMKM lokal dengan keranjang belanja interaktif dan pemesanan WhatsApp instan. |
+| **[Ökiro Café](https://okiro-cafe.vercel.app)** | Solo Frontend & UI/UX | HTML5, CSS3, JS, Vercel | **Live Demo Showcase**. Website company profile & katalog menu kedai kopi artisan bertema Japanese-Minimalist terhubung order WhatsApp. |
+| **[Horus Barbershop](https://horus-barbershop.vercel.app)** | Solo Web Developer | TailwindCSS, JavaScript, Vercel | **Live Demo Showcase**. Website barbershop premium royal grooming dengan lookbook artisan dan sistem booking WhatsApp. |
+| **[Toriel Store](https://toriel-store.vercel.app)** | Solo Web Developer | TailwindCSS, JavaScript, Vercel | **Live Demo Showcase**. Katalog belanja online retail UMKM lokal dengan keranjang belanja interaktif dan pemesanan WhatsApp. |
 
 ---
 
