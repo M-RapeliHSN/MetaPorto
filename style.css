@@ -1,6 +1,6 @@
 /* ============================================================
    METAPORTO — METAPHOR: REFANTAZIO UI Overhaul
-   100% Pixel-Perfect AAA Game UI Styling & Motion
+   Metaphor: ReFantazio Themed Game UI Experience & Interaction System
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@400;600;700;800;900&display=swap');
@@ -2779,28 +2779,76 @@ body {
    08 JOURNAL & 09 SYSTEM: ARCHIVE DOCKET & MECHANICAL PREFERENCES
    ============================================================= */
 .journal-game-card, .system-game-menu {
-  background: rgba(8, 10, 14, 0.85);
+  background: rgba(8, 10, 14, 0.88);
   border: 1.5px solid rgba(255,255,255,0.25);
   border-left: 5px solid #00838f;
-  padding: 2.5rem;
-  max-width: 720px;
+  padding: 2.2rem 2.5rem;
+  max-width: 840px;
   clip-path: polygon(0 0, 100% 0, 97% 100%, 0 100%);
-  transform: skewX(-4deg);
+  transform: skewX(-3deg);
 }
 
 .j-badge { font-family: var(--font-menu); font-size: 0.95rem; font-weight: 900; color: #ffffff; letter-spacing: 0.2em; margin-bottom: 16px; background: #000000; padding: 4px 12px; display: inline-block; border-left: 3px solid #00838f; }
-.journal-game-card p { font-size: 1.05rem; color: rgba(255,255,255,0.95); line-height: 1.7; margin-bottom: 2.0rem; }
+
+.j-intro-text {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.j-entry {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 3px solid #00838f;
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 1.0rem;
+}
+
+.j-entry-header {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #00e5ff;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.j-entry-body {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.j-entry-body strong {
+  color: #ffffff;
+}
+
+.j-resume-box {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.j-resume-box p {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.55;
+  margin-bottom: 1.2rem;
+}
 
 .j-btn, .sys-dl-btn {
   display: inline-block;
   font-family: var(--font-menu);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 900;
   background: #ffffff;
   color: #000000;
-  padding: 14px 30px;
+  padding: 12px 26px;
   text-decoration: none;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   transition: all 180ms ease;
   clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
   border: 2px solid #ffffff;

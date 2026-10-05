@@ -36,10 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     party: 'assets/party-bg.png',
     follower: 'assets/f7cef99c-c822-41e4-ba8b-b53242a2bc18.png',
     quest: 'assets/614f9d7a-b1a0-4703-b9f7-4984b840e5ed.png',
+    calendar: 'assets/calendar-bg.jpg',
     journal: 'assets/8459fa4f-105b-4515-8beb-0a3ab52dc832.png',
-    system: 'assets/system-bg.png',
-    // Siap diisi untuk menu lain saat user memberikan gambarnya:
-    // calendar: '...'
+    system: 'assets/system-bg.png'
   };
 
   // Smart On-Demand Background Preloader (Conserves RAM & Prevents Tab Lag)
@@ -717,10 +716,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==================== SKILL PAGE PARTY CARD SWITCHER ====================
   const skillSets = {
     backend: [
-      { icon: '◈', elemClass: 'phys', name: 'PHP 8 & Laravel 11/12', badge: 'PRIMARY STACK' },
+      { icon: '◈', elemClass: 'phys', name: 'PHP 8.3 & Laravel 13.x', badge: 'PRIMARY STACK' },
       { icon: '◇', elemClass: 'wind', name: 'RESTful API Architecture', badge: 'ADVANCED' },
       { icon: '◎', elemClass: 'magic', name: 'Node.js & Express.js Backend', badge: 'PROJECT EXP' },
-      { icon: '○', elemClass: 'fire', name: 'Python Scripting & Automation', badge: 'DAILY USE' }
+      { icon: '○', elemClass: 'fire', name: 'Python Scripting & Automation', badge: 'AUTOMATION EXP' }
     ],
     frontend: [
       { icon: '◈', elemClass: 'phys', name: 'HTML5 / CSS3 / JavaScript ES6+', badge: 'CORE STACK' },
@@ -1051,9 +1050,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const eqData = [
     {
       title: 'Backend Architecture (PHP & Laravel)',
-      desc: 'Fokus utama pada perancangan logika bisnis backend terstruktur menggunakan PHP 8 dan framework Laravel (versi 11/12), pembuatan endpoint RESTful API terstandarisasi, routing middleware, autentikasi data aman, dan integrasi arsitektur MVC.',
+      desc: 'Fokus utama pada perancangan logika bisnis backend terstruktur menggunakan PHP 8.3 dan framework Laravel (versi 13.x), pembuatan endpoint RESTful API terstandarisasi, routing middleware, autentikasi data aman, dan integrasi arsitektur MVC.',
       slots: [
-        { label: 'CORE RUNTIME & FRAMEWORK', name: 'PHP 8.3 & Laravel 11/12', val: 'Primary' },
+        { label: 'CORE RUNTIME & FRAMEWORK', name: 'PHP 8.3 & Laravel 13.x', val: 'Primary' },
         { label: 'API ARCHITECTURE', name: 'RESTful JSON Resource API', val: 'Structured' },
         { label: 'DATABASE ORM', name: 'Eloquent ORM & Migrations', val: 'Optimized' },
         { label: 'SECURITY & MIDDLEWARE', name: 'Sanctum Auth & Validation', val: 'Secured' }
@@ -1509,7 +1508,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const stencilWords = [
       '01', '02', '03', '04', '05', '06', '07', '08', '09',
       'COMMAND', 'REFANTAZIO', 'ARCHETYPE', 'EXP', 'MAG', 'STR',
-      'LV.99', 'æŠ€ãƒ»ã‚¹ã‚­ãƒ«', 'å‘½', 'æ–¬', 'é­”', 'IV', 'VIII'
+      '技・スキル', '命', '斬', '魔', 'IV', 'VIII'
     ];
 
     function spawnCollageShape() {
