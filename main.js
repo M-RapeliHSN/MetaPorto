@@ -209,9 +209,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (audioCtx.state === 'suspended') {
       audioCtx.resume();
     }
-    if (!isBgmPlaying && !isBgmUserPaused) {
-      startBgm();
-    }
   }
 
   // Utility: create a short burst of filtered white noise
@@ -764,13 +761,13 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'grow-a-garden',
       name: 'GROW-A-GARDEN',
       role: 'Backend Engineer',
-      liveUrl: 'https://github.com/Apisikma123/Grow-a-garden.git',
+      liveUrl: null,
       repoUrl: 'https://github.com/Apisikma123/Grow-a-garden.git',
       slides: [
         {
           src: 'assets/projects/grow-a-garden/1.png',
           category: 'HERO LANDING PAGE',
-          caption: 'Halaman beranda utama dengan branding asisten berkebun cerdas berbasis web.'
+          caption: 'Halaman beranda asisten berkebun cerdas berbasis web (Clean MVC Architecture).'
         },
         {
           src: 'assets/projects/grow-a-garden/2.png',
@@ -787,38 +784,38 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'wilmarbooks',
       name: 'WILMARBOOKS (DONASI BUKU WBI)',
-      role: 'Backend & Database Developer (Team)',
+      role: 'Backend & Database Developer (Team / PKL WBI)',
       liveUrl: 'https://donasi-buku.wbi.ac.id',
       repoUrl: 'https://github.com/Apisikma123/wilmarbuku.git',
       slides: [
         {
           src: 'assets/projects/wilmarbooks/1.png',
-          category: 'HERO LANDING PAGE',
-          caption: 'Portal donasi buku digital perpustakaan Politeknik Wilmar Bisnis Indonesia.'
+          category: 'CAMPUS PRODUCTION DEPLOYMENT',
+          caption: 'Portal donasi buku digital resmi institusi kampus (donasi-buku.wbi.ac.id) berbasis PHP 8.3 & Laravel 13.'
         },
         {
           src: 'assets/projects/wilmarbooks/2.png',
           category: 'KATALOG BUKU & INVENTORY',
-          caption: 'Katalog interaktif buku donasi dengan filter pencarian dan tampilan kartu e-commerce.'
+          caption: 'Katalog interaktif buku donasi, filter relasional MySQL, dan manajemen stok perpustakaan terpusat.'
         },
         {
           src: 'assets/projects/wilmarbooks/3.png',
           category: 'FORM DONASI & TRACKING',
-          caption: 'Alur administrasi penyerahan donasi buku terpusat dan pencatatan riwayat donatur.'
+          caption: 'Alur donasi terverifikasi dengan Socialite Google SSO, Laravel Reverb WebSockets, dan rekap PDF dinamis.'
         }
       ]
     },
     {
       id: 'kapi',
       name: 'KAPI (KERETA API BOOKING SYSTEM)',
-      role: 'Solo Fullstack Developer',
-      liveUrl: 'https://github.com/M-RapeliHSN/KAPI.git',
+      role: 'Solo Fullstack Developer (Backend & UI)',
+      liveUrl: null,
       repoUrl: 'https://github.com/M-RapeliHSN/KAPI.git',
       slides: [
         {
           src: 'assets/projects/kapi/1.png',
-          category: 'HERO RESERVATION PORTAL',
-          caption: 'Antarmuka utama pencarian rute, tanggal perjalanan, dan stasiun keberangkatan.'
+          category: 'RESERVATION SEARCH ENGINE',
+          caption: 'Pencarian rute dinamis multi-stasiun, relasi database jadwal kereta, dan kalkulasi tarif otomatis.'
         },
         {
           src: 'assets/projects/kapi/2.png',
@@ -827,8 +824,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
           src: 'assets/projects/kapi/3.png',
-          category: '3D SEAT MAP & E-TICKET QR',
-          caption: 'Interactive seat map pemilihan kursi anti-overbooking dan e-ticket boarding pass digital.'
+          category: 'CONCURRENCY SEAT LOCK & PEST TESTS',
+          caption: 'Interactive 3D seat map dengan transactional locking anti-overbooking. Teruji oleh 37 tests / 98 assertions Pest PHP.'
         }
       ]
     },
@@ -836,13 +833,13 @@ document.addEventListener('DOMContentLoaded', () => {
       id: 'inventaris-wbi',
       name: 'INVENTARIS WBI (SISTEM ASET KAMPUS)',
       role: 'Backend Developer',
-      liveUrl: 'https://github.com/r4hmansun/inventartis-WBI.git',
+      liveUrl: null,
       repoUrl: 'https://github.com/r4hmansun/inventartis-WBI.git',
       slides: [
         {
           src: 'assets/projects/inventaris-wbi/1.png',
-          category: 'PORTAL AUTH & LOGIN',
-          caption: 'Gerbang autentikasi aman dengan pemisahan hak akses Admin dan Super Admin.'
+          category: 'RBAC AUTHENTICATION',
+          caption: 'Gerbang autentikasi aman dengan Role-Based Access Control (RBAC) Admin dan Super Admin.'
         },
         {
           src: 'assets/projects/inventaris-wbi/2.png',
@@ -852,7 +849,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
           src: 'assets/projects/inventaris-wbi/3.png',
           category: 'MUTASI BARANG & AUDIT LOG',
-          caption: 'Tracking sirkulasi mutasi aset kampus, status kondisi, dan verifikasi barang.'
+          caption: 'Tracking sirkulasi mutasi aset kampus, audit kondisi barang, dan pelaporan inventaris internal.'
         }
       ]
     },
@@ -970,13 +967,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (previewCaptionText) previewCaptionText.textContent = slide.caption;
 
     const targetUrl = project.liveUrl || project.repoUrl;
-    if (previewOverlayLink) previewOverlayLink.href = targetUrl;
+    if (previewOverlayLink) {
+      previewOverlayLink.href = targetUrl;
+      const previewActionText = document.getElementById('previewActionText');
+      if (previewActionText) {
+        previewActionText.textContent = project.liveUrl ? 'OPEN LIVE SITE ↗' : 'VIEW GITHUB REPO ↗';
+      }
+    }
     if (previewLiveLink) {
-      previewLiveLink.href = targetUrl;
-      previewLiveLink.style.display = project.liveUrl ? 'inline-flex' : 'none';
+      if (project.liveUrl) {
+        previewLiveLink.href = project.liveUrl;
+        previewLiveLink.style.display = 'inline-flex';
+      } else {
+        previewLiveLink.style.display = 'none';
+      }
     }
     if (previewRepoLink) {
-      previewRepoLink.href = project.repoUrl || targetUrl;
+      previewRepoLink.href = project.repoUrl;
+      previewRepoLink.style.display = 'inline-flex';
     }
 
     // Update indicator bars
@@ -1134,11 +1142,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const calMilestonesData = [
     {
       year: '2026',
-      tag: 'PROFESSIONAL INTERNSHIP',
+      tag: 'WORK EXPERIENCE / PKL',
       title: 'BACKEND DEVELOPER INTERN',
       inst: 'Politeknik Wilmar Bisnis Indonesia • Periode 22 Juli 2026 — 22 Oktober 2026',
       desc: 'Praktik Kerja Lapangan (PKL) resmi di Politeknik Wilmar Bisnis Indonesia (WBI). Bertanggung jawab penuh dalam perancangan skema dan normalisasi basis data relasional MySQL, perancangan logika bisnis backend dengan framework Laravel & PHP, serta implementasi sistem manajemen aset kampus (Inventaris WBI) dan portal donasi perpustakaan digital (WilmarBooks).',
-      comp: ['Backend Engineering', 'Laravel 11/12 & PHP 8', 'MySQL Relational Schema', 'REST API Architecture', 'Role & Auth Security']
+      comp: ['Backend Engineering', 'PHP 8.3 & Laravel 13.x', 'MySQL Relational Schema', 'REST API Architecture', 'Role & Auth Security']
     },
     {
       year: '2024',
@@ -1565,6 +1573,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initEditorialCollage();
+
+  // Protagonist Dossier Quick-Pass Buttons
+  const dossierExploreBtn = document.querySelector('[data-action="explore-projects"]');
+  if (dossierExploreBtn) {
+    dossierExploreBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const itemMenu = document.querySelector('.menu-item[data-page="item"]');
+      if (itemMenu) itemMenu.click();
+    });
+  }
+  const dossierContactBtn = document.querySelector('[data-action="contact-direct"]');
+  if (dossierContactBtn) {
+    dossierContactBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const followerMenu = document.querySelector('.menu-item[data-page="follower"]');
+      if (followerMenu) followerMenu.click();
+    });
+  }
 
 });
 

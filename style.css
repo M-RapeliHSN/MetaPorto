@@ -35,7 +35,6 @@ body {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  user-select: none;
 }
 
 /* ===== BACKGROUND MEDIA & OVERLAYS ===== */
@@ -3426,4 +3425,202 @@ body {
     display: none;
   }
 }
+
+/* =============================================================
+   PROTAGONIST QUICK DOSSIER (MAIN MENU FAST-PASS HUD)
+   ============================================================= */
+.protagonist-dossier {
+  position: absolute;
+  right: 5vw;
+  bottom: 6vh;
+  width: 440px;
+  max-width: 90vw;
+  background: rgba(10, 10, 10, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-left: 4px solid #d32f2f;
+  padding: 1.4rem 1.6rem;
+  z-index: 8;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+  animation: fadeInDossier 500ms ease forwards;
+}
+
+@keyframes fadeInDossier {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dossier-top-badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.dossier-prefix {
+  color: #fbc02d;
+  font-weight: 800;
+}
+
+.dossier-status-pulse {
+  color: #00e676;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.dossier-name {
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.25rem 0;
+  line-height: 1.2;
+}
+
+.dossier-subtitle {
+  font-family: var(--font-title);
+  font-size: 0.76rem;
+  color: #d32f2f;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.dossier-mission {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 0.85rem 0;
+}
+
+.dossier-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 1.1rem;
+}
+
+.d-tag {
+  font-size: 0.68rem;
+  padding: 2px 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-title);
+  letter-spacing: 0.04em;
+}
+
+.d-tag.primary {
+  background: rgba(211, 47, 47, 0.2);
+  border-color: #d32f2f;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.dossier-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.dossier-action-btn {
+  flex: 1;
+  background: #d32f2f;
+  border: 1px solid #ff5252;
+  color: #ffffff;
+  font-family: var(--font-title);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 160ms ease;
+  text-align: center;
+}
+
+.dossier-action-btn:hover {
+  background: #ff1744;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.5);
+}
+
+.dossier-action-btn.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.dossier-action-btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #ffffff;
+}
+
+@media (max-width: 960px) {
+  .protagonist-dossier {
+    display: none;
+  }
+}
+
+/* =============================================================
+   PROJECT ITEM CATEGORY DIVIDERS
+   ============================================================= */
+.m-item-category-header {
+  padding: 0.75rem 1.0rem;
+  margin: 1.0rem 0 0.5rem 0;
+  background: linear-gradient(90deg, rgba(211, 47, 47, 0.35) 0%, rgba(0,0,0,0.5) 100%);
+  border-left: 3px solid #d32f2f;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-title);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.m-item-category-header:first-of-type {
+  margin-top: 0;
+}
+
+.m-item-category-header.client {
+  background: linear-gradient(90deg, rgba(251, 192, 45, 0.25) 0%, rgba(0,0,0,0.5) 100%);
+  border-left-color: #fbc02d;
+  color: #fbc02d;
+}
+
+.cat-header-icon {
+  font-size: 0.7rem;
+}
+
+/* =============================================================
+   ACCESSIBILITY: PREFERS-REDUCED-MOTION ESCAPE HATCH
+   ============================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .editorial-collage-layer,
+  .shatter-container,
+  .preview-glitch-overlay {
+    display: none !important;
+  }
+
+  .ink-canvas {
+    opacity: 0.3 !important;
+  }
+}
+
 
