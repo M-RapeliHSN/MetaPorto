@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     party: 'assets/party-bg.png',
     follower: 'assets/f7cef99c-c822-41e4-ba8b-b53242a2bc18.png',
     quest: 'assets/614f9d7a-b1a0-4703-b9f7-4984b840e5ed.png',
-    calendar: 'assets/calendar-bg.jpg',
+    calendar: 'assets/twk2i43ldc9e1.gif',
     journal: 'assets/8459fa4f-105b-4515-8beb-0a3ab52dc832.png',
     system: 'assets/system-bg.png'
   };
