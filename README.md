@@ -10,7 +10,7 @@
 
 **MetaPorto** adalah portofolio web interaktif personal milik **Muhammad Raffly Husaini** (Backend-focused Fullstack Developer & Pelajar RPL di SMK Telkom 1 Medan), yang dibangun dengan konsep antarmuka game legendaris ***Metaphor: ReFantazio*** (Atlus). 
 
-Seluruh sistem dibangun dari nol menggunakan **Vanilla Web Technologies (HTML5, Modern CSS, ES6+ JavaScript, Canvas API, dan Web Audio API)** tanpa framework frontend berat demi latensi 0ms, kepatuhan arsitektur, dan performa rendering 60 FPS yang solid.
+Seluruh sistem dibangun dari nol menggunakan **Vanilla Web Technologies (HTML5, Modern CSS, ES6+ JavaScript, Canvas API, dan Web Audio API)** tanpa framework frontend berat untuk memastikan interaktivitas yang responsif, kepatuhan arsitektur, dan rendering antarmuka yang efisien.
 
 ---
 
@@ -35,8 +35,8 @@ Navigasi penuh tanpa mouse di seluruh layar:
 
 ### 4. High-Performance & Memory Optimization
 - **Hardware-Accelerated Compositing**: Menggunakan `transform: translateZ(0)` dan layer isolasi GPU untuk mencegah repainting layar.
-- **Smart On-Demand Preloader**: Hanya memuat background Home di awal; background menu lain baru di-cache saat kursor melakukan hover/focus (menghemat ~70% RAM browser).
-- **Tab Visibility Hibernation**: Canvas loop partikel tinta dan background visual otomatis tidur (0% CPU) saat pengguna berpindah tab.
+- **Smart On-Demand Preloader**: Hanya memuat background Home di awal; aset latar menu lain baru dimuat secara dinamis saat kursor melakukan hover atau fokus pada navigasi untuk meminimalkan alokasi memori browser sejak pemuatan pertama.
+- **Tab Visibility Hibernation**: Siklus rendering partikel Canvas dan animasi visual otomatis dihentikan sementara (*paused*) menggunakan Page Visibility API saat pengguna beralih ke tab lain untuk menghemat daya dan siklus komputasi.
 - **Accessibility Friendly**: Dilengkapi dukungan `@media (prefers-reduced-motion: reduce)` dan text-selection terbuka untuk mempermudah recruiter menyalin informasi.
 
 ---
@@ -94,7 +94,7 @@ python -m http.server 5500
 
 - ✉️ **Email**: [raflyhusaini0290@gmail.com](mailto:raflyhusaini0290@gmail.com)
 - 🐙 **GitHub**: [@M-RapeliHSN](https://github.com/M-RapeliHSN)
-- 💬 **WhatsApp**: [+62 838 4648 0183](https://wa.me/6283846480183)
+- 💬 **WhatsApp**: [Direct Message &amp; Consultation](https://wa.me/6283846480183)
 - 📸 **Instagram**: [@blanks_raa](https://instagram.com/blanks_raa)
 
 ---
