@@ -1055,7 +1055,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { label: 'CORE RUNTIME & FRAMEWORK', name: 'PHP 8.3 & Laravel 13.x', val: 'Primary' },
         { label: 'API ARCHITECTURE', name: 'RESTful JSON Resource API', val: 'Structured' },
         { label: 'DATABASE ORM', name: 'Eloquent ORM & Migrations', val: 'Optimized' },
-        { label: 'SECURITY & MIDDLEWARE', name: 'Sanctum Auth & Validation', val: 'Secured' }
+        { label: 'SECURITY & MIDDLEWARE', name: 'Session Auth & Role Middleware', val: 'Secured' }
       ]
     },
     {
@@ -1151,8 +1151,8 @@ document.addEventListener('DOMContentLoaded', () => {
       year: '2024',
       tag: 'FORMAL EDUCATION',
       title: 'REKAYASA PERANGKAT LUNAK (RPL)',
-      inst: 'SMK Telkom 1 Medan • Periode 2024 — Sekarang',
-      desc: 'Menempuh pendidikan vokasi kejuruan Rekayasa Perangkat Lunak (RPL) di SMK Telkom 1 Medan dengan fokus pembelajaran mendalam pada Logika Algoritma, Pemrograman Backend, Basis Data MySQL, Pemrograman Berorientasi Objek (OOP), dan Pengembangan Web Modern.',
+      inst: 'SMK Telkom 1 Medan • Periode 2024 — 2027 (Estimasi Lulus: Mei 2027)',
+      desc: 'Menempuh pendidikan vokasi kejuruan Rekayasa Perangkat Lunak (RPL) di SMK Telkom 1 Medan dengan perkiraan kelulusan Mei 2027. Mendalami rekayasa sistem backend berbasis PHP & Laravel, relasional basis data MySQL, unit & functional testing otomatis, dan siap ditempatkan pada magang industri lanjutan atau posisi junior developer.',
       comp: ['Rekayasa Perangkat Lunak', 'PHP & Laravel', 'MySQL Database', 'REST API', 'Git & GitHub']
     }
   ];

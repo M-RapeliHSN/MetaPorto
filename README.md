@@ -47,8 +47,8 @@ Portofolio ini menampilkan rekayasa sistem backend terverifikasi, bukan sekadar 
 
 | Project | Role | Tech Stack | Highlights & Architecture |
 | :--- | :--- | :--- | :--- |
-| **[WilmarBooks](https://donasi-buku.wbi.ac.id)** | Backend & DB Developer (PKL) | PHP 8.3, Laravel 13, MySQL, Reverb, Socialite | **Live Campus Production** di Politeknik Wilmar Bisnis Indonesia. Arsitektur MVC terstruktur, Google OAuth SSO, real-time WebSocket notifications, dan PDF reporting engine. |
-| **[KAPI](https://github.com/M-RapeliHSN/KAPI)** | Solo Fullstack Developer | Laravel 12, MySQL, Pest PHP, TailwindCSS | Platform reservasi tiket kereta api dengan **Transactional Seat Locking Engine** anti-overbooking. Teruji komprehensif oleh **37 automated tests / 98 assertions** (Pest PHP). |
+| **[WilmarBooks](https://donasi-buku.wbi.ac.id)** | Backend & DB Developer (PKL) | PHP 8.3, Laravel 13, MySQL, Reverb, Socialite | **Live Campus Production** di Politeknik Wilmar Bisnis Indonesia. Arsitektur MVC terstruktur, alur verifikasi donasi & upload bukti transfer bank, Google OAuth SSO, real-time Reverb WebSocket notifications, dan dynamic PDF receipts. |
+| **[KAPI](https://github.com/M-RapeliHSN/KAPI)** | Solo Fullstack Developer | Laravel 12, MySQL, Pest PHP, TailwindCSS | Platform reservasi tiket kereta api dengan **Transactional Seat Reservation & Integrity Logic** untuk mitigasi double booking. Teruji komprehensif oleh **37 automated tests / 98 assertions** (Pest PHP). |
 | **[Inventaris WBI](https://github.com/r4hmansun/inventartis-WBI)** | Backend Developer (PKL) | PHP 8, Laravel, MySQL | Sistem inventaris aset kampus dengan Role-Based Access Control (Admin & Super Admin), siklus mutasi barang, dan audit tahun anggaran. |
 | **[Grow-a-Garden](https://github.com/Apisikma123/Grow-a-garden)** | Backend Developer (Team) | PHP 8.3, Laravel 13, MySQL, Reverb, Weather API | Multi-domain smart garden platform. Merancang logika plant lifecycle, arsitektur modular service-layer (`AutopilotService`, `WeatherService`), scheduled console commands, dan event broadcasting real-time via Laravel Reverb. |
 | **[Ökiro Café](https://okiro-cafe.vercel.app)** | Solo Frontend & UI/UX | HTML5, CSS3, JS, Vercel | **Live Demo Showcase**. Website company profile & katalog menu kedai kopi artisan bertema Japanese-Minimalist terhubung order WhatsApp. |
@@ -89,7 +89,7 @@ python -m http.server 5500
 ## 👤 Author & Contact
 
 **Muhammad Raffly Husaini**  
-*Backend-focused Fullstack Developer · Pelajar Rekayasa Perangkat Lunak (RPL)*  
+*Backend Developer · Pelajar Tingkat Akhir RPL SMK Telkom 1 Medan (Estimasi Kelulusan Mei 2027)*  
 *Medan, Sumatera Utara, Indonesia*
 
 - ✉️ **Email**: [raflyhusaini0290@gmail.com](mailto:raflyhusaini0290@gmail.com)
