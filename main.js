@@ -29,14 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==================== DYNAMIC PAGE BACKGROUNDS ====================
   // Maps specific background artwork per menu
   const pageBackgrounds = {
-    home: 'assets/twk2i43ldc9e1.gif',
+    home: 'assets/twk2i43ldc9e1.webp',
     skill: 'assets/38752648-bd78-49a8-b9ea-c31f585c702f.png',
     item: 'assets/bc0323a7-d167-4af9-bded-0374ed78f99e.png',
     equipment: 'assets/e91f5449-4afe-4b57-b81c-99fabd80865d.png',
     party: 'assets/party-bg.png',
     follower: 'assets/f7cef99c-c822-41e4-ba8b-b53242a2bc18.png',
     quest: 'assets/614f9d7a-b1a0-4703-b9f7-4984b840e5ed.png',
-    calendar: 'assets/twk2i43ldc9e1.gif',
+    calendar: 'assets/twk2i43ldc9e1.webp',
     journal: 'assets/8459fa4f-105b-4515-8beb-0a3ab52dc832.png',
     system: 'assets/system-bg.png'
   };
@@ -1559,14 +1559,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 400);
     }
 
-    // Elegant, cinematic flashing loop (gentle on CPU & memory)
+    let collageTimeoutId = null;
     function scheduleNextCollage() {
-      const nextDelay = Math.floor(Math.random() * 1200 + 1200); // 1.2s - 2.4s
-      setTimeout(() => {
+      if (document.hidden) {
+        collageTimeoutId = null;
+        return;
+      }
+      const nextDelay = Math.floor(Math.random() * 1400 + 1400); // 1.4s - 2.8s
+      collageTimeoutId = setTimeout(() => {
         spawnCollageShape();
         scheduleNextCollage();
       }, nextDelay);
     }
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && !collageTimeoutId) {
+        scheduleNextCollage();
+      } else if (document.hidden && collageTimeoutId) {
+        clearTimeout(collageTimeoutId);
+        collageTimeoutId = null;
+      }
+    });
 
     scheduleNextCollage();
   }
